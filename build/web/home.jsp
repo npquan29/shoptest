@@ -30,7 +30,7 @@
 
         <link rel="stylesheet" href="assets/css/base.css"/>
         <link rel="stylesheet" href="assets/css/home.css" />
-        
+
     </head>
     <body>
         <jsp:include page="header.jsp" />
@@ -93,62 +93,22 @@
                     <div class="product__head-title">Our Products</div>
                 </div>
                 <div class="product__main">
-                    <div class="product__item">
-                        <div class="product__image">
-                            <img src="assets/image/rosschair.jpg" alt="" />
-                        </div>
-                        <div class="product__info">
-                            <div class="product__title">Ross Chair</div>
-                            <div class="product__details">
-                                <div class="product__price">640$</div>
-                                <div class="product__stock">Stock: 90</div>
+                    <c:forEach var="it" items="${requestScope.listHome}">
+                        <div class="product__item">
+                            <div class="product__image">
+                                <img src="${it.image}" alt="" />
                             </div>
-                            <a href="products" class="product__btn"> Shop Now </a>
-                        </div>
-                        <div class="product__tag">New</div>
-                    </div>
-                    <div class="product__item">
-                        <div class="product__image">
-                            <img src="assets/image/diningchair.jpg" alt="" />
-                        </div>
-                        <div class="product__info">
-                            <div class="product__title">Dining Chair</div>
-                            <div class="product__details">
-                                <div class="product__price">300$</div>
-                                <div class="product__stock">Stock: 100</div>
+                            <div class="product__info">
+                                <div class="product__title">${it.name}</div>
+                                <div class="product__details">
+                                    <div class="product__price">${it.sell}$</div>
+                                    <div class="product__stock">Stock: ${it.stock}</div>
+                                </div>
+                                <a href="products" class="product__btn"> Shop Now </a>
                             </div>
-                            <a href="products" class="product__btn"> Shop Now </a>
+                            <div class="product__tag">New</div>
                         </div>
-                        <div class="product__tag">New</div>
-                    </div>
-                    <div class="product__item">
-                        <div class="product__image">
-                            <img src="assets/image/sofa.jpg" alt="" />
-                        </div>
-                        <div class="product__info">
-                            <div class="product__title">Big Sofa</div>
-                            <div class="product__details">
-                                <div class="product__price">800$</div>
-                                <div class="product__stock">Stock: 70</div>
-                            </div>
-                            <a href="products" class="product__btn"> Shop Now </a>
-                        </div>
-                        <div class="product__tag">New</div>
-                    </div>
-                    <div class="product__item">
-                        <div class="product__image">
-                            <img src="assets/image/barstool.jpg" alt="" />
-                        </div>
-                        <div class="product__info">
-                            <div class="product__title">Bar Stool</div>
-                            <div class="product__details">
-                                <div class="product__price">800$</div>
-                                <div class="product__stock">Stock: 80</div>
-                            </div>
-                            <a href="products" class="product__btn"> Shop Now </a>
-                        </div>
-                        <div class="product__tag">New</div>
-                    </div>
+                    </c:forEach>
                 </div>
                 <div class="product__btn-more">
                     <a href="products"> Show More </a>

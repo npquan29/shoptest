@@ -52,7 +52,7 @@
                 <li>
                     <a href="showCart">
                         <i class="fa-solid fa-cart-shopping"></i>
-                        <c:if test="${sessionScope.numInCart != null}">
+                        <c:if test="${sessionScope.numInCart != null && sessionScope.numInCart != 0}">
                             <span>${sessionScope.numInCart}</span>
                         </c:if>
                     </a>

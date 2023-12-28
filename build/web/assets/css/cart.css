@@ -1,0 +1,250 @@
+/* banner */
+.banner {
+    background-image: url(../image/bannershop.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+}
+
+.banner::before {
+    content: "";
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffffa3;
+    z-index: 0;
+}
+
+.banner__main {
+    position: relative;
+    padding: 120px 0;
+    text-align: center;
+}
+
+.banner__title {
+    color: #000;
+    font-size: 48px;
+    font-weight: 600;
+}
+
+.banner__url {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.banner__url li {
+    margin: 10px 5px;
+}
+/* End banner */
+
+/* shopping-cart */
+.shopping-cart {
+    padding: 70px 0;
+}
+
+.shopping-cart__main {
+    display: flex;
+}
+
+.shopping-cart__left {
+    width: 72%;
+}
+
+.shopping-cart__left table{
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.shopping-cart__left th, .shopping-cart__left td {
+    /* border: 1px solid #000; */
+    padding: 0;
+}
+
+.shopping-cart__left td {
+    border-bottom: 1px solid #ddd;
+}
+
+.shopping-cart__left th {
+    font-size: 18px;
+    font-weight: 600;
+    background-color: #F9F1E7;
+    padding: 15px 0;
+    letter-spacing: 0.5px;
+}
+
+.shopping-cart__left td {
+    text-align: center;
+}
+
+td.shopping-cart__product div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 0;
+}
+
+.shopping-cart__product img {
+    width: 30%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    display: block;
+    margin-right: 30px;
+    border-radius: 10px;
+}
+
+.shopping-cart__product span {
+    flex: 1;
+    text-align: left;
+}
+
+.shopping-cart__quantity {
+    width: 20%;
+}
+
+.shopping-cart__quantity div {
+    display: flex;
+    justify-content: center;
+}
+
+.shopping-cart__quantity a, .shopping-cart__quantity span {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background-color: #F6F7F8;
+    line-height: 40px;
+}
+
+.shopping-cart__quantity a {
+    color: #B88E2F;
+    font-size: 16px;
+    transition: all .3s;
+    cursor: pointer;
+}
+
+.shopping-cart__quantity a:hover {
+    background-color: #B88E2F;
+    color: #FFF;
+}
+
+.shopping-cart__price, .shopping-cart__subtotal {
+    width: 18%;
+}
+
+.shopping-cart__action {
+    width: 5%;
+}
+
+.shopping-cart__action a {
+    display: inline-block;
+    color: #B88E2F;
+    font-size: 24px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: #F6F7F8;
+    line-height: 48px;
+    transition: all .3s;
+}
+
+.shopping-cart__action a:hover {
+    color: #FFF;
+    background-color: #B88E2F;
+    line-height: 48px;
+}
+
+.shopping-cart__right {
+    flex: 1;
+    margin-left: 30px;
+    background-color: #F9F1E7;
+    max-height: 270px;
+    padding: 15px;
+}
+
+.shopping-cart__right h1 {
+    margin: 0;
+    font-size: 32px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.shopping-cart__right ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.shopping-cart__right ul li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.shopping-cart__right ul li h4 {
+    font-size: 18px;
+    margin: 15px 0;
+}
+
+.shopping-cart__right ul li span {
+    font-size: 18px;
+}
+
+.shopping-cart__checkout {
+    display: inline-block;
+    width: 100%;
+    padding: 15px 0;
+    border: 1px solid #7c7c7c;
+    border-radius: 10px;
+    color: #000;
+    text-align: center;
+    margin-top: 15px;
+    font-size: 20px;
+    transition: all .3s;
+}
+
+.shopping-cart__checkout:hover {
+    border: 1px solid #B88E2F;
+    color: #fff;
+    background-color: #B88E2F;
+}
+/* End shopping-cart */
+
+/* service */
+.service {
+    padding: 80px 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #FAF3EA;
+}
+
+.service__item {
+    display: flex;
+    align-items: center;
+}
+
+.service__info {
+    margin-left: 10px;
+}
+
+.service__title {
+    color: #242424;
+    font-size: 25px;
+    font-weight: 600;
+    line-height: 37.5px;
+}
+
+.service__desc {
+    color: #898989;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 30px; 
+}
+/* End service */

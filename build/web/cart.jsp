@@ -1,6 +1,6 @@
 <%-- 
-    Document   : shop
-    Created on : Dec 27, 2023, 10:28:57 PM
+    Document   : cart
+    Created on : Dec 28, 2023, 11:48:50 AM
     Author     : lap
 --%>
 
@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Shop</title>
+        <title>Cart</title>
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
               integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
@@ -20,8 +20,8 @@
               crossorigin="anonymous" referrerpolicy="no-referrer" />
 
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-        <link rel="stylesheet" href="assets/css/shop.css"/>
-        <link rel="stylesheet" href="assets/css/base.css"/>
+        <link rel="stylesheet" href="assets/css/base.css" />
+        <link rel="stylesheet" href="assets/css/cart.css">
     </head>
     <body>
         <jsp:include page="header.jsp" />
@@ -30,7 +30,7 @@
         <div class="banner">
             <div class="banner__main">
                 <div class="banner__title">
-                    Shop
+                    Cart
                 </div>
                 <ul class="banner__url">
                     <li>Home</li>
@@ -38,147 +38,89 @@
                         <i class="fa-solid fa-chevron-right"></i>
                     </li>
                     <li>
-                        Shop
+                        Cart
                     </li>
                 </ul>
             </div>
         </div>
         <!-- End banner -->
 
-        <!-- products -->
-        <div class="products">
+        <!-- shopping-cart -->
+        <div class="shopping-cart">
             <div class="container">
-                <form id="f1" action="products" class="products__main" method="get">
-                    <div class="products__tab-left">
-                        <div class="products__box">
-                            <h3>Category</h3>
-                            <ul>
-                                <c:set var = "listCate" value = "${requestScope.listCat}"/>
-                                <c:set var="checkCat" value = "${requestScope.isCheckCat}" />
-                                <c:forEach var="i" begin="0" end="${listCate.size() - 1}">
-                                    <li>
-                                        <c:set var="it" value="${listCate[i]}" />
-                                        <input id="${it.id}" type="checkbox" 
-                                               ${checkCat[i] == true ? "checked" : ""}
-                                               name="category" value="${it.id}" 
-                                               onclick="handleSubmit()">
-                                        <label for="${it.id}">${it.name}</label>
-                                    </li>
+                <c:set var="listItems" value="${requestScope.listCartIt}" />
+                <c:if test="${listItems.size() != 0}">
+                    <div class="shopping-cart__main">
+                        <div class="shopping-cart__left">
+                            <table>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Subtotal</th>
+                                    <th></th>
+                                </tr>
+                                <c:forEach var="it" items="${listItems}">
+                                    <tr>
+                                        <td class="shopping-cart__product">
+                                            <div>
+                                                <img src="${it.item.image}" alt="">
+                                                <span>${it.item.name}</span>
+                                            </div>
+                                        </td>
+                                        <td class="shopping-cart__price">
+                                            ${it.item.sell}$
+                                        </td>
+                                        <td class="shopping-cart__quantity">
+                                            <div>
+                                                <a class="shopping-cart__btn-substract"
+                                                   onclick="checkQuantity(1, '${it.item.id}', ${it.quantity}, ${it.item.stock})">
+                                                    <i class="fa-solid fa-minus"></i>
+                                                </a>
+                                                <span>${it.quantity}</span>
+                                                <a class="shopping-cart__btn-plus"
+                                                   onclick="checkQuantity(2, '${it.item.id}', ${it.quantity}, ${it.item.stock})">
+                                                    <i class="fa-solid fa-plus"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                        <td class="shopping-cart__subtotal">
+                                            ${it.quantity * it.item.sell}$
+                                        </td>
+                                        <td class="shopping-cart__action">
+                                            <a href="deleteCartIt?id=${it.item.id}">
+                                                <i class="fa-regular fa-trash-can"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
                                 </c:forEach>
-                            </ul>
+
+                            </table>
                         </div>
-                        <div class="products__box">
-                            <h3>Price</h3>
+                        <div class="shopping-cart__right">
+                            <h1>Cart Totals</h1>
                             <ul>
-                                <c:set var="priceList" value="${requestScope.listPrice}" />
-                                <c:set var="checkPrice" value = "${requestScope.isCheckPrice}" />
-                                <c:forEach var="i" begin="0" end="${priceList.size() - 1}">
-                                    <li>
-                                        <c:set var="it" value="${priceList.get(i)}" />
-                                        <input id="${i + 1}" type="checkbox" 
-                                               ${checkPrice[i] == true ? "checked" : ""}
-                                               name="price" value="${i + 1}" 
-                                               onclick="handleSubmit()">
-                                        <label for="${i + 1}">${it}</label>
-                                    </li>
-                                </c:forEach>
+                                <li>
+                                    <h4>Subtotal</h4>
+                                    <span>${requestScope.total}$</span>
+                                </li>
+                                <li>
+                                    <h4>Total</h4>
+                                    <span style="color: #B88E2F; font-weight: 500;">${requestScope.total}$</span>
+                                </li>
                             </ul>
+                            <a href="ordercomplete.html" class="shopping-cart__checkout">
+                                Check Out
+                            </a>
                         </div>
                     </div>
-
-                    <div class="products__tab-right">
-                        <div class="products__filter">
-                            <span>${requestScope.numItem} Items</span>
-                            <div class="products__sort">
-                                <span>Sort By:</span>
-                                <select id="sortType" name="sortType">
-                                    <c:set var="option" value="${param.sortType == null ? '1' : param.sortType}" />
-                                    <c:set var="sortList" value="${requestScope.listSort}" />
-                                    <c:forEach var="i" begin="0" end="${sortList.size() - 1}">
-                                        <option value="${i + 1}" 
-                                                ${option == i + 1 ? "selected" : ""}>
-                                            ${sortList.get(i)}
-                                        </option>
-                                    </c:forEach>
-                                </select>
-                            </div>
-                            <div class="products__number">
-                                <span>Per Page:</span>
-                                <select id="perPage" name="numberPerPage">
-                                    <c:set var="num" value="${param.numberPerPage == null ? '6' : param.numberPerPage}" />
-                                    <c:set var="perPageList" value="${requestScope.listPerPage}" />
-                                    <c:forEach var="i" begin="0" end="${perPageList.size() - 1}">
-                                        <option value="${perPageList.get(i)}" 
-                                                ${num == perPageList.get(i) ? "selected" : ""}>
-                                            ${perPageList.get(i)}
-                                        </option>
-                                    </c:forEach>
-                                </select>
-                            </div>
-                            <div class="products__display">
-                                <div>
-                                    <i class='bx bxs-grid'></i>
-                                </div>
-                                <div>
-                                    <i class='bx bx-menu'></i>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="products__list">
-                            <c:forEach var="it" items="${requestScope.listItem}">
-                                <div class="products__item">
-                                    <div class="products__image">
-                                        <img src="${it.image}" alt="">
-                                    </div>
-                                    <div class="products__info">
-                                        <div class="products__title">
-                                            ${it.name}
-                                        </div>
-                                        <div class="products__details">
-                                            <div class="products__price">
-                                                ${it.sell}$
-                                            </div>
-                                            <div class="products__stock">
-                                                Stock: ${it.stock}
-                                            </div>
-                                        </div>
-                                        <div class="products__btn">
-                                            <a href="#">
-                                                <i class="fa-regular fa-eye"></i>
-                                            </a>
-                                            <a href="addCart?action=add&id=${it.id}&num=1">
-                                                <i class="fa-solid fa-cart-shopping"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="products__tag">
-                                        New
-                                    </div>
-                                </div>
-                            </c:forEach>
-
-                        </div>
-
-                        <div class="products__pagination">
-                            <ul>
-                                <c:set var="page" value="${requestScope.curPage}" />
-                                <c:forEach var="i" begin="${1}" end="${requestScope.numPages}" >
-                                    <li>
-                                        <a class="${page == i ? 'active' : ''}" href="products?page=${i}&${requestScope.url}">
-                                            ${i}
-                                        </a>
-                                    </li>
-                                </c:forEach>
-
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- <input type="submit" value="SUBMIT"> -->
-                </form>
+                </c:if>
+                <c:if test="${listItems.size() == 0}">
+                    <h1>There is no item in your cart</h1>
+                </c:if>
             </div>
         </div>
-        <!-- End products -->
+        <!-- End shopping-cart -->
 
         <!-- service -->
         <div class="service">
@@ -269,21 +211,17 @@
         <jsp:include page="footer.jsp" />
 
         <script>
-            const handleSubmit = () => {
-                const formElement = document.getElementById("f1");
-                formElement.submit();
+            const checkQuantity = (op, id, quantity, stock) => {
+                var s = 'addCart?action=update&id=' + id;
+                if (op === 1 && quantity > 1) {
+                    s += '&num=-1';
+                    window.location.href = s;
+                } else if (op === 2 && quantity < stock) {
+                    s += '&num=1';
+                    window.location.href = s;
+                }
             };
-
-            const filter = document.getElementById("sortType");
-            filter.addEventListener("change", (e) => {
-                handleSubmit();
-            });
-
-            const perPage = document.getElementById("perPage");
-            perPage.addEventListener("change", (e) => {
-                handleSubmit();
-            });
-
         </script>
+
     </body>
 </html>

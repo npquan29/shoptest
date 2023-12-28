@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.Random;
 import model.CartItem;
 import model.Item;
@@ -62,7 +63,8 @@ public class AddCartServlet extends HttpServlet {
     throws ServletException, IOException {
         String itemID = request.getParameter("id");
         String num = request.getParameter("num");
-        
+        String action = request.getParameter("action");
+                
         CartItemDAO cidb = new CartItemDAO();
         ItemDAO idb = new ItemDAO();
         int sl = (num == null) ? 1 : Integer.valueOf(num);
@@ -83,7 +85,14 @@ public class AddCartServlet extends HttpServlet {
         else{
             cidb.updateQuantity(cit, sl);
         }
-        response.sendRedirect("products");
+        ArrayList<CartItem> list = cidb.getListItemsByUser(u);
+        session.setAttribute("numInCart", list.size());
+        if(action.equals("add")){
+            response.sendRedirect("products");
+        }
+        else{
+            response.sendRedirect("showCart");
+        }
     } 
 
     private String createCartItemID(){

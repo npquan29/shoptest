@@ -6,7 +6,6 @@
 package controller;
 
 import dal.CartItemDAO;
-import dal.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -22,7 +21,7 @@ import model.User;
  *
  * @author lap
  */
-public class LoginServlet extends HttpServlet {
+public class ShowCartServlet extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -39,10 +38,10 @@ public class LoginServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet LoginServlet</title>");  
+            out.println("<title>Servlet ShowCartServlet</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet LoginServlet at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet ShowCartServlet at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -59,7 +58,14 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.getRequestDispatcher("login.jsp").forward(request, response);
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("account");
+        CartItemDAO cidb = new CartItemDAO();
+        ArrayList<CartItem> listCartIt = cidb.getListItemsByUser(user);
+        double total = cidb.getTotalMoney(listCartIt);
+        request.setAttribute("total", total);
+        request.setAttribute("listCartIt", listCartIt);
+        request.getRequestDispatcher("cart.jsp").forward(request, response);
     } 
 
     /** 
@@ -72,28 +78,7 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        UserDAO udb = new UserDAO();
-        CartItemDAO cidb = new CartItemDAO();
-        User x = udb.checkUser(username, password);
-        HttpSession session = request.getSession();
-        if (x == null) {
-            request.setAttribute("error", "Username or password is invalid");
-            request.getRequestDispatcher("login.jsp").forward(request, response);
-        } else {
-            session.setAttribute("account", x);
-            ArrayList<CartItem> list = cidb.getListItemsByUser(x);
-            if(list != null && !list.isEmpty()){
-                session.setAttribute("numInCart", list.size());
-            }
-            if(x.getRole()== 1){
-                response.sendRedirect("home");
-            }
-            else{
-                response.sendRedirect("admin");
-            }
-        }
+        processRequest(request, response);
     }
 
     /** 

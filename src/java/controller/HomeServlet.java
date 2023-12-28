@@ -5,12 +5,16 @@
 
 package controller;
 
+import dal.ItemDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.Random;
+import model.Item;
 
 /**
  *
@@ -53,8 +57,23 @@ public class HomeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        ItemDAO idb = new ItemDAO();
+        ArrayList<Item> list = idb.getAll();
+        ArrayList<Item> tmp = getRandomItems(list);
+        request.setAttribute("listHome", tmp);
         request.getRequestDispatcher("home.jsp").forward(request, response);
     } 
+    
+    private ArrayList<Item> getRandomItems(ArrayList<Item> list){
+        int n = list.size();
+        Random random = new Random();
+        ArrayList<Item> res = new ArrayList<>();
+        for(int i = 0; i < 4; i++){
+            int idx = random.nextInt(n);
+            res.add(list.get(idx));
+        }
+        return res;
+    }
 
     /** 
      * Handles the HTTP <code>POST</code> method.

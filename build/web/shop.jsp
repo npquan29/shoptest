@@ -147,7 +147,7 @@
                                             <a href="#">
                                                 <i class="fa-regular fa-eye"></i>
                                             </a>
-                                            <a href="addCart?id=${it.id}&num=1">
+                                            <a href="addCart?action=add&id=${it.id}&num=1">
                                                 <i class="fa-solid fa-cart-shopping"></i>
                                             </a>
                                         </div>

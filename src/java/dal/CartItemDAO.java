@@ -6,6 +6,7 @@ package dal;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import model.CartItem;
 import model.Item;
 import model.User;
@@ -24,9 +25,10 @@ public class CartItemDAO extends DBContext {
             st.setString(1, itemID);
             st.setString(2, user.getId());
             ResultSet rs = st.executeQuery();
-            while (rs.next()) {
+            if (rs.next()) {
                 CartItem ci = new CartItem();
                 ci.setId(rs.getString("cartID"));
+                ci.setUser(user);
                 Item it = idb.getItemByID(itemID);
                 ci.setItem(it);
                 ci.setQuantity(rs.getInt("quantity"));
@@ -36,6 +38,37 @@ public class CartItemDAO extends DBContext {
             System.out.println(e);
         }
         return null;
+    }
+    
+    public ArrayList<CartItem> getListItemsByUser(User x){
+        String sql = "select * from cartitem where userID = ?";
+        ArrayList<CartItem> list = new ArrayList<>();
+        ItemDAO idb = new ItemDAO();
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, x.getId());
+            ResultSet rs = st.executeQuery();
+            while(rs.next()){
+                CartItem ci = new CartItem();
+                ci.setId(rs.getString("cartID"));
+                Item it = idb.getItemByID(rs.getString("itemID"));
+                ci.setItem(it);
+                ci.setUser(x);
+                ci.setQuantity(rs.getInt("quantity"));
+                list.add(ci);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+    
+    public double getTotalMoney(ArrayList<CartItem> list){
+        double res = 0;
+        for(CartItem x : list){
+            res += (x.getQuantity() * x.getItem().getSell());
+        }
+        return res;
     }
 
     public void insertCartItem(CartItem x) {
@@ -58,6 +91,18 @@ public class CartItemDAO extends DBContext {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, num);
             st.setString(2, x.getId());
+            st.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+    
+    public void deleteCartItem(User user, Item it){
+        String sql = "delete from cartitem where itemID = ? and userID = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, it.getId());
+            st.setString(2, user.getId());
             st.executeUpdate();
         } catch (Exception e) {
             System.out.println(e);
