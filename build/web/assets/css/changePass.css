@@ -1,0 +1,98 @@
+/* change-pass */
+.change {
+    display: flex;
+}
+
+.change__tab {
+    background-color: #F9F1E7;
+    padding: 30px 60px;
+    height: calc(100vh - 99.1px);
+}
+
+.change__menu ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.change__menu ul li {
+    padding: 15px 0;
+    transition: all .3s;
+}
+
+.change__menu ul li a {
+    color: #000;
+    font-size: 18px;
+}
+
+.change__menu ul li:hover a {
+    color: #B88E2F;
+    font-size: 18px;
+}
+
+.change__right {
+    margin: 30px 0 30px 30px;
+    flex: 1;
+    background-color: #F9F1E7;
+    padding: 30px;
+    border-radius: 5px 0 0 5px;
+}
+
+.change__right h2 {
+    /* text-align: center; */
+    font-size: 24px;
+    margin: 0;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: #B88E2F;
+}
+
+.change__right .form-group label {
+    display: inline-block;
+    font-size: 18px;
+    padding: 15px 0;
+    margin: 0;
+    letter-spacing: 0.5px;
+    font-weight: bold;
+}
+
+.change__main {
+    max-width: 40%;
+    /* margin: 0 auto; */
+}
+
+.change__main .form-group input {
+    display: block;
+    background-color: #fff;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.change__main button {
+    margin-top: 15px;
+    display: inline-block;
+    padding: 15px 30px;
+    border: 1px solid #B88E2F;
+    color: #000;
+    border-radius: 5px;
+    letter-spacing: 0.5px;
+    font-size: 20px;
+    background-color: #F9F1E7;
+    cursor: pointer;
+}
+
+.change__main button:hover {
+    background-color: #B88E2F;
+    color: #fff;
+}
+
+.error-changepass {
+    color: red;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 500;
+    margin: 15px 0;
+}
+/* End change-pass */

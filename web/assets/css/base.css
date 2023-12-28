@@ -1,0 +1,283 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Nov 17, 2023, 8:24:15 PM
+    Author     : lap
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+:root {
+    --font: 'Inter', sans-serif;
+    ;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font);
+}
+
+a {
+    text-decoration: none;
+}
+
+/* container */
+.container {
+    max-width: 1140px;
+    margin: 0 auto;
+}
+/* End container */
+
+/* header */
+.header {
+    padding: 30px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
+}
+
+.header__logo {
+    display: flex;
+    align-items: center;
+}
+
+.header__logo img {
+    display: block;
+    margin-right: 10px;
+}
+
+.header__logo span {
+    font-size: 34px;
+    font-weight: 800;
+    color: #000;
+}
+
+.header__menu, .header__icon {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+.header__menu li {
+    margin: 0 30px;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.header__menu li a {
+    color: #000;
+    transition: all .3s;
+}
+
+.header__menu li a:hover {
+    color: #B88E2F;
+}
+
+.header__icon {
+    position: relative;
+}
+
+.header__icon li {
+    padding: 0 15px;
+}
+
+.header__icon li a {
+    display: inline-block;
+    position: relative;
+    /*margin: 0 20px;*/
+    font-size: 20px;
+    color: #000;
+}
+
+.header__icon li a > span {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    top: -10px;
+    right: -10px;
+    font-size: 14px;
+    color: #fff;        
+    background-color: #B88E2F;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 18px;
+}
+
+.header__icon li span {
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.header__authen {
+    font-size: 16px;
+}
+
+li.header__authen a {
+    font-size: 16px;
+    transition: all .2s;
+}
+
+li.header__authen a:hover {
+    color: #B88E2F;
+}
+
+.menu__dropdown {
+    background: #fff;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    border-radius: 8px;
+    position: absolute;
+    top: 35px;
+    right: 10px;
+    display: none;
+}
+
+.menu__dropdown.active {
+    display: block;
+}
+
+.menu__dropdown h4 {
+    margin: 0;
+    padding: 15px;
+    text-transform: capitalize;
+    border-bottom: 1px solid #ccc;
+    font-weight: 600;
+}
+
+.menu__dropdown ul {
+    list-style: none;
+    margin: 0;
+    padding: 0 15px;
+}
+
+.menu__dropdown li {
+    padding: 10px 0;
+}
+
+.menu__dropdown li a {
+    color: #000;
+    letter-spacing: 0.25px;
+    font-size: 16px;
+}
+
+.menu__dropdown li a:hover {
+    color: #B88E2F;
+}
+/* End header */
+
+/* footer */
+.footer {
+    border-top: 1px solid #D9D9D9;
+}
+
+.footer__main {
+    padding: 50px 0;
+    display: flex;
+    border-bottom: 1px solid #D9D9D9;
+}
+
+.footer__contact {
+    width: 30%;
+}
+
+.footer__contact-title {
+    color: #000;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 50px;
+}
+
+.footer__contact-address, .footer__contact-phone {
+    color: #9F9F9F;
+    font-weight: 400;
+    line-height: 1.3;
+}
+
+.footer__contact-address {
+    margin-bottom: 10px;
+}
+
+.footer__title {
+    color: #9F9F9F;
+    font-weight: 500;
+    margin-bottom: 50px;
+}
+
+.footer__links {
+    padding: 0 80px;
+}
+
+.footer__help {
+    margin-right: 100px;
+}
+
+.footer__links ul, .footer__help ul {
+    padding: 0;
+    list-style-type: none;
+    margin: 0;
+}
+
+.footer__links ul li, .footer__help ul li {
+    margin-bottom: 40px;
+    color: #000;
+    font-weight: 500;
+}
+
+.footer__links ul li:last-child {
+    margin-bottom: 0;
+}
+
+.footer__newsletter {
+    flex: 1;
+}
+
+.footer__input input {
+    border: none;
+    border-bottom: 1px solid #000;
+    outline: none;
+    font-size: 16px;
+    padding: 0 0 5px 0;
+}
+
+.footer__input a {
+    display: inline-block;
+    color: #000;
+    font-size: 16px;
+    font-weight: 500;
+    padding-bottom: 5px;
+    text-transform: uppercase;
+    border-bottom: 1px solid #000;
+    margin-left: 10px;
+}
+
+.footer__input a:hover {
+    color: #9F9F9F;
+}
+
+.footer__copy {
+    padding: 40px 0;
+    color: #000;
+    font-weight: 500;
+}
+/* End footer */
+
+/*error*/
+.error {
+    color: red;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+/*End error*/

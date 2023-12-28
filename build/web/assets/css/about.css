@@ -1,0 +1,141 @@
+/* banner */
+.banner {
+    background-image: url(../image/bannershop.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+}
+
+.banner::before {
+    content: "";
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffffa3;
+    z-index: 0;
+}
+
+.banner__main {
+    position: relative;
+    padding: 120px 0;
+    text-align: center;
+}
+
+.banner__title {
+    color: #000;
+    font-size: 48px;
+    font-weight: 600;
+}
+
+.banner__url {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.banner__url li {
+    margin: 10px 5px;
+}
+/* End banner */
+
+/* content */
+.content {
+    padding: 100px 0;
+}
+
+.content__box {
+    display: flex;
+    align-items: center;
+}
+
+.content__left {
+    position: relative;   
+    width: 50%;
+}
+
+.content__left::before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background-color: #FFF3E3;
+    border-radius: 10px;
+}
+
+.content__image {
+    width: 100%;
+    aspect-ratio: 1.42;
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.content__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.content__right {
+    flex: 1;
+    margin-left: 50px;
+}
+
+.content__right-title {
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 48px; 
+    margin-bottom: 20px;
+}
+
+.content__right ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.content__right ul li {
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+}
+
+.content__right ul li i {
+    font-size: 30px;
+    color: #B88E2F;
+}
+
+.content__right ul li span {
+    margin-left: 10px;
+    font-size: 20px;
+}
+
+.content__btn {
+    display: inline-block;
+    padding: 20px 40px;
+    text-transform: uppercase;
+    background-color: #B88E2F;
+    color: #fff;
+    border-radius: 10px;
+    margin-top: 30px;
+    border: 1px solid #fff;
+    font-weight: 500;
+    transition: all .3s;
+}
+
+.content__btn:hover {
+    background-color: #fff;
+    color: #B88E2F;
+    border-color: #B88E2F;
+}
+/* End content */
