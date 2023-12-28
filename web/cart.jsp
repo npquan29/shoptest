@@ -65,7 +65,7 @@
                                         <td class="shopping-cart__product">
                                             <div>
                                                 <img src="${it.item.image}" alt="">
-                                                <span>${it.item.name}</span>
+                                                <span onclick="viewDetail('${it.item.id}')">${it.item.name}</span>
                                             </div>
                                         </td>
                                         <td class="shopping-cart__price">
@@ -116,7 +116,12 @@
                     </div>
                 </c:if>
                 <c:if test="${listItems.size() == 0}">
-                    <h1>There is no item in your cart</h1>
+                    <div class="cart-empty">
+                        <h1>There's no item in your cart.</h1>
+                        <a href="products">
+                            Let's go shopping !
+                        </a>
+                    </div>
                 </c:if>
             </div>
         </div>
@@ -221,6 +226,11 @@
                     window.location.href = s;
                 }
             };
+
+            const viewDetail = (id) => {
+                var url = 'viewItem?id=' + id;
+                window.location.href = url;
+            }
         </script>
 
     </body>

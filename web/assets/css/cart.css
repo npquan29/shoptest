@@ -103,6 +103,11 @@ td.shopping-cart__product div {
 .shopping-cart__product span {
     flex: 1;
     text-align: left;
+    cursor: pointer;
+}
+
+.shopping-cart__product span:hover {
+    color: #B88E2F;
 }
 
 .shopping-cart__quantity {
@@ -211,6 +216,27 @@ td.shopping-cart__product div {
 
 .shopping-cart__checkout:hover {
     border: 1px solid #B88E2F;
+    color: #fff;
+    background-color: #B88E2F;
+}
+
+.cart-empty {
+    text-align: center;
+}
+
+.cart-empty a {
+    display: inline-block;
+    padding: 15px 30px;
+    border: 1px solid #B88E2F;
+    color: #B88E2F;
+    font-size: 24px;
+    letter-spacing: 0.5px;
+    font-weight: 500;
+    transition: all .3s;
+    border-radius: 10px;
+}
+
+.cart-empty a:hover {
     color: #fff;
     background-color: #B88E2F;
 }

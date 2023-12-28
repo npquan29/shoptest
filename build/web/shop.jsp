@@ -144,7 +144,7 @@
                                             </div>
                                         </div>
                                         <div class="products__btn">
-                                            <a href="#">
+                                            <a href="viewItem?id=${it.id}">
                                                 <i class="fa-regular fa-eye"></i>
                                             </a>
                                             <a href="addCart?action=add&id=${it.id}&num=1">
