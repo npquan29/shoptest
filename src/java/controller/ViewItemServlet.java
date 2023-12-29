@@ -5,6 +5,7 @@
 
 package controller;
 
+import dal.CartItemDAO;
 import dal.ItemDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,7 +13,10 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import model.CartItem;
 import model.Item;
+import model.User;
 
 /**
  *
@@ -58,6 +62,13 @@ public class ViewItemServlet extends HttpServlet {
         String id = request.getParameter("id");
         ItemDAO idb = new ItemDAO();
         Item it = idb.getItemByID(id);
+        CartItemDAO cidb = new CartItemDAO();
+        HttpSession session = request.getSession();
+        User u = (User) session.getAttribute("account");
+        CartItem cit = cidb.getItemByUser(u, id);
+        int inCart = 0;
+        if(cit != null) inCart = cit.getQuantity();
+        request.setAttribute("inCart", inCart);
         request.setAttribute("item", it);
         request.getRequestDispatcher("itemDetails.jsp").forward(request, response);
     } 

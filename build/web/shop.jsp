@@ -147,7 +147,7 @@
                                             <a href="viewItem?id=${it.id}">
                                                 <i class="fa-regular fa-eye"></i>
                                             </a>
-                                            <a href="addCart?action=add&id=${it.id}&num=1">
+                                            <a onclick="checkQuantity(${it.stock}, '${it.id}')">
                                                 <i class="fa-solid fa-cart-shopping"></i>
                                             </a>
                                         </div>
@@ -268,6 +268,12 @@
 
         <jsp:include page="footer.jsp" />
 
+        <!-- modal -->
+        <div class="modal" id="modal">
+            <h4 id="modalMessage"></h4>
+        </div>
+        <!-- End modal -->
+
         <script>
             const handleSubmit = () => {
                 const formElement = document.getElementById("f1");
@@ -283,6 +289,32 @@
             perPage.addEventListener("change", (e) => {
                 handleSubmit();
             });
+
+            function showModal(message) {
+                var modal = document.getElementById("modal");
+                var modalMessage = document.getElementById("modalMessage");
+
+                modalMessage.innerText = message;
+                modal.classList.add("show");
+
+                setTimeout(function () {
+                    closeModal();
+                }, 1500);
+            }
+
+            function closeModal() {
+                var modal = document.getElementById("modal");
+                modal.classList.remove("show");
+            }
+
+            const checkQuantity = (num, id) => {
+                if (num >= 1) {
+                    window.location.href = 'addCart?action=add&id=' + id + '&num=1';
+                } else {
+                    showModal("The product is out of stock !");
+                }
+            };
+
 
         </script>
     </body>

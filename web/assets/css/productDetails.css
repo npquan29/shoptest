@@ -273,3 +273,32 @@
     padding-left: 70px;
 }
 /* End comment */
+
+/* modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: -100%; 
+    left: -100%; 
+    padding: 20px 40px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: top 0.5s ease-in-out, left 0.5s ease-in-out;
+    z-index: 10000;
+    color: #B88E2F;
+    font-size: 20px;
+}
+
+.modal.show {
+    display: block;
+    top: 10px; 
+    left: 50%; 
+    transform: translate(-50%, 0); 
+}
+
+.modal h4 {
+    font-size: 20px;
+    letter-spacing: 0.5px;
+    margin: 20px 0;
+}
+/* End modal */

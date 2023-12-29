@@ -92,7 +92,7 @@
                                 </a>
                                 <span class="number">1</span>
                                 <input type="hidden" name="num">
-                                <a class="plus">
+                                <a class="plus" onclick="check(${inCart}, ${it.stock})">
                                     <i class="fa-solid fa-plus"></i>
                                 </a>
                             </div>
@@ -119,8 +119,14 @@
             </div>
         </div>
         <!-- End description -->
-        
+
         <jsp:include page="footer.jsp" />
+
+        <!-- modal -->
+        <div class="modal" id="modal">
+            <h4 id="modalMessage"></h4>
+        </div>
+        <!-- End modal -->
 
         <script>
             var spanElement = document.querySelector('.number');
@@ -132,9 +138,22 @@
                 updateValue(-1);
             });
 
-            plusButton.addEventListener('click', function () {
-                updateValue(1);
-            });
+            function showModal(message) {
+                var modal = document.getElementById("modal");
+                var modalMessage = document.getElementById("modalMessage");
+
+                modalMessage.innerText = message;
+                modal.classList.add("show");
+
+                setTimeout(function () {
+                    closeModal();
+                }, 1500);
+            }
+
+            function closeModal() {
+                var modal = document.getElementById("modal");
+                modal.classList.remove("show");
+            }
 
             const updateValue = (change) => {
                 var currentValue = parseInt(spanElement.textContent);
@@ -150,6 +169,17 @@
                 inputElement.value = newValue;
 
             };
+
+            const check = (inCart, inStock) => {
+                var currentValue = parseInt(spanElement.textContent);
+                if (currentValue + inCart + 1 > inStock) {
+                    showModal("Can't add more products!");
+                } else {
+                    spanElement.textContent = currentValue + 1;
+                    inputElement.value = currentValue + 1;
+                }
+
+            }
         </script>
     </body>
 </html>

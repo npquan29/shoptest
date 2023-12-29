@@ -67,7 +67,7 @@ public class AddCartServlet extends HttpServlet {
                 
         CartItemDAO cidb = new CartItemDAO();
         ItemDAO idb = new ItemDAO();
-        int sl = (num == null) ? 1 : Integer.valueOf(num);
+        int sl = (num == null || num == "") ? 1 : Integer.valueOf(num);
         
         HttpSession session = request.getSession();
         User u = (User) session.getAttribute("account");
@@ -79,11 +79,16 @@ public class AddCartServlet extends HttpServlet {
             newCit.setId(cartID);
             newCit.setItem(it);
             newCit.setUser(u);
-            newCit.setQuantity(sl);
+            int slAdd = Math.min(sl, it.getStock());
+            newCit.setQuantity(slAdd);
             cidb.insertCartItem(newCit);
         }
         else{
-            cidb.updateQuantity(cit, sl);
+            int slInCart = cit.getQuantity();
+            int slAdd;
+            if(slInCart + sl > it.getStock()) slAdd = it.getStock() - slInCart;
+            else slAdd = sl;
+            cidb.updateQuantity(cit, slAdd);
         }
         ArrayList<CartItem> list = cidb.getListItemsByUser(u);
         session.setAttribute("numInCart", list.size());
