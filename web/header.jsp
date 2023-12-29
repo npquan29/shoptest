@@ -50,9 +50,10 @@
                     </a>
                 </li>
                 <li>
+                    <c:set var="numInCart" value="${sessionScope.numInCart}" />
                     <a href="showCart">
                         <i class="fa-solid fa-cart-shopping"></i>
-                        <c:if test="${sessionScope.numInCart != null && sessionScope.numInCart != 0}">
+                        <c:if test="${numInCart != null && numInCart != 0}">
                             <span>${sessionScope.numInCart}</span>
                         </c:if>
                     </a>

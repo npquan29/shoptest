@@ -1,0 +1,127 @@
+/* banner */
+.banner {
+    background-image: url(../image/bannershop.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+}
+
+.banner::before {
+    content: "";
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffffa3;
+    z-index: 0;
+}
+
+.banner__main {
+    position: relative;
+    padding: 120px 0;
+    text-align: center;
+}
+
+.banner__title {
+    color: #000;
+    font-size: 48px;
+    font-weight: 600;
+}
+
+.banner__url {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.banner__url li {
+    margin: 10px 5px;
+}
+/* End banner */
+
+/* completed */
+.completed {
+    padding: 60px 0;
+}
+
+.completed__main {
+    max-width: 70%;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.completed__icon {
+    font-size: 64px;
+    color: #B88E2F;
+}
+
+.completed__title {
+    font-size: 36px;
+    font-weight: 700;
+    margin: 20px 0;
+}
+
+.completed__desc {
+    font-size: 18px;
+    line-height: 30px;
+    color: #333;
+    letter-spacing: 0.25px;
+}
+
+.completed__btn a {
+    display: inline-block;
+    padding: 15px 30px;
+    font-size: 18px;
+    font-weight: 500;
+    background-color: #fff;
+    border: 1px solid #B88E2F;
+    color: #B88E2F;
+    margin-top: 40px;
+    transition: all .3s;
+    border-radius: 10px;
+}
+
+.completed__btn a:hover {
+    background-color: #B88E2F;
+    color: #fff;
+}
+/* End completed */
+
+/* service */
+.service {
+    padding: 80px 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #FAF3EA;
+}
+
+.service__item {
+    display: flex;
+    align-items: center;
+}
+
+.service__info {
+    margin-left: 10px;
+}
+
+.service__title {
+    color: #242424;
+    font-size: 25px;
+    font-weight: 600;
+    line-height: 37.5px;
+}
+
+.service__desc {
+    color: #898989;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 30px; 
+}
+/* End service */

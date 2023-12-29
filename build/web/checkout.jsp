@@ -1,6 +1,6 @@
 <%-- 
-    Document   : cart
-    Created on : Dec 28, 2023, 11:48:50 AM
+    Document   : checkout
+    Created on : Dec 29, 2023, 3:35:43 PM
     Author     : lap
 --%>
 
@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Cart</title>
+        <title>Checkout</title>
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
               integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
@@ -18,10 +18,10 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
               integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
               crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
 
-        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
         <link rel="stylesheet" href="assets/css/base.css" />
-        <link rel="stylesheet" href="assets/css/cart.css">
+        <link rel="stylesheet" href="assets/css/checkout.css" />
     </head>
     <body>
         <jsp:include page="header.jsp" />
@@ -29,103 +29,133 @@
         <!-- banner -->
         <div class="banner">
             <div class="banner__main">
-                <div class="banner__title">
-                    Cart
-                </div>
+                <div class="banner__title">Checkout</div>
                 <ul class="banner__url">
                     <li>Home</li>
                     <li>
                         <i class="fa-solid fa-chevron-right"></i>
                     </li>
-                    <li>
-                        Cart
-                    </li>
+                    <li>Checkout</li>
                 </ul>
             </div>
         </div>
         <!-- End banner -->
 
-        <!-- shopping-cart -->
-        <div class="shopping-cart">
+        <!-- order -->
+        <div class="order">
             <div class="container">
-                <c:set var="listItems" value="${requestScope.listCartIt}" />
-                <c:if test="${listItems.size() != 0}">
-                    <div class="shopping-cart__main">
-                        <div class="shopping-cart__left">
-                            <table>
-                                <tr>
-                                    <th>Product</th>
-                                    <th>Price</th>
-                                    <th>Quantity</th>
-                                    <th>Subtotal</th>
-                                    <th></th>
-                                </tr>
-                                <c:forEach var="it" items="${listItems}">
-                                    <tr>
-                                        <td class="shopping-cart__product">
-                                            <div>
-                                                <img src="${it.item.image}" alt="">
-                                                <span onclick="viewDetail('${it.item.id}')">${it.item.name}</span>
+                <c:set var="u" value="${sessionScope.account}" />
+                <c:set var="list" value="${requestScope.listCheckOut}" />
+                <c:set var="total" value="${requestScope.amount}" /> 
+                <h1 class="order__title">Billing details</h1>
+                <form action="placeOrder" id="f1" class="main" method="get">
+                    <div class="main__left">
+                        <div class="form-group">
+                            <h3>
+                                Full name
+                                <span>*</span>
+                            </h3>
+                            <input type="text" name="fullname" value="${u.fullname}" />
+                        </div>
+                        <div class="form-group">
+                            <h3>
+                                Address
+                                <span>*</span>
+                            </h3>
+                            <input type="text" name="address" value="${u.address}" />
+                        </div>
+                        <div class="form-group">
+                            <h3>
+                                Phone number
+                                <span>*</span>
+                            </h3>
+                            <input type="text" name="phone" value="${u.phone}" />
+                        </div>
+                        <div class="form-group">
+                            <h3>
+                                Payment Method
+                                <span>*</span>
+                            </h3>
+                            <select name="payment" id="paymentSelect" onchange="toggleBankInfo()">
+                                <option value="0">-- Select --</option>
+                                <option value="1">Payment on delivery</option>
+                                <option value="2">Payment by card</option>
+                            </select>
+                        </div>
+                        <div class="bank__info" id="bankInfo" style="display: none">
+                            <div class="form-group">
+                                <h3>
+                                    Bank
+                                    <span>*</span>
+                                </h3>
+                                <select name="bankCode" id="bankSelect">
+                                </select>
+                                <input type="hidden" name="bankName" id="bankName">
+                            </div>
+                            <div class="form-group">
+                                <h3>
+                                    Account Number
+                                    <span>*</span>
+                                </h3>
+                                <input type="text" name="accountNum" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="main__right">
+                        <ul>
+                            <div class="main__right-headtitle">
+                                <h3>Product</h3>
+                                <h3>Subtotal</h3>
+                            </div>
+                            <li class="product">
+                                <c:forEach var="it" items="${list}">
+                                    <div class="product__item">
+                                    <div class="product__detail">
+                                        <div class="product__image">
+                                            <img src="${it.item.image}" alt="">
+                                        </div>
+                                        <div class="product__info">
+                                            <div class="product__name">
+                                                ${it.item.name}
                                             </div>
-                                        </td>
-                                        <td class="shopping-cart__price">
-                                            ${it.item.sell}$
-                                        </td>
-                                        <td class="shopping-cart__quantity">
-                                            <div>
-                                                <a class="shopping-cart__btn-substract"
-                                                   onclick="checkQuantity(1, '${it.item.id}', ${it.quantity}, ${it.item.stock})">
-                                                    <i class="fa-solid fa-minus"></i>
-                                                </a>
-                                                <span>${it.quantity}</span>
-                                                <a class="shopping-cart__btn-plus"
-                                                   onclick="checkQuantity(2, '${it.item.id}', ${it.quantity}, ${it.item.stock})">
-                                                    <i class="fa-solid fa-plus"></i>
-                                                </a>
-                                            </div>
-                                        </td>
-                                        <td class="shopping-cart__subtotal">
-                                            ${it.quantity * it.item.sell}$
-                                        </td>
-                                        <td class="shopping-cart__action">
-                                            <a href="deleteCartIt?id=${it.item.id}">
-                                                <i class="fa-regular fa-trash-can"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
+                                            <div class="product__quantity">Quantity : ${it.quantity}</div>
+                                        </div>
+                                    </div>
+                                    <div class="product__sub">
+                                        ${it.quantity * it.item.sell}$
+                                    </div>
+                                </div>
                                 </c:forEach>
+                            </li>
+                            <li class="subtotal">
+                                <h3>Subtotal</h3>
+                                <div>${total}$</div>
+                            </li>
+                            <li class="subtotal">
+                                <h3>Ship cost</h3>
+                                <div>30$</div>
+                            </li>
 
-                            </table>
-                        </div>
-                        <div class="shopping-cart__right">
-                            <h1>Cart Totals</h1>
-                            <ul>
-                                <li>
-                                    <h4>Subtotal</h4>
-                                    <span>${requestScope.total}$</span>
-                                </li>
-                                <li>
-                                    <h4>Total</h4>
-                                    <span style="color: #B88E2F; font-weight: 500;">${requestScope.total}$</span>
-                                </li>
-                            </ul>
-                            <a href="checkout" class="shopping-cart__checkout">
-                                Check Out
-                            </a>
-                        </div>
+                            <li class="totalOrder">
+                                <h3>Total</h3>
+                                <h2>${total + 30}$</h2>
+                            </li>
+                        </ul>
+
+                        <button id="place" type="button" onclick="validateAndSubmit()">
+                            Place Order
+                        </button>
                     </div>
-                </c:if>
-                <c:if test="${listItems.size() == 0}">
-                    <div class="cart-empty">
-                        <h1>There's no item in your cart.</h1>
-                        <a href="products">
-                            Let's go shopping !
-                        </a>
-                    </div>
-                </c:if>
+                </form>
             </div>
         </div>
-        <!-- End shopping-cart -->
+        <!-- End order -->
+
+        <!-- modal -->
+        <div class="modal" id="modal">
+            <h4 id="modalMessage"></h4>
+        </div>
+        <!-- End modal -->
 
         <!-- service -->
         <div class="service">
@@ -216,22 +246,91 @@
         <jsp:include page="footer.jsp" />
 
         <script>
-            const checkQuantity = (op, id, quantity, stock) => {
-                var s = 'addCart?action=update&id=' + id;
-                if (op === 1 && quantity > 1) {
-                    s += '&num=-1';
-                    window.location.href = s;
-                } else if (op === 2 && quantity < stock) {
-                    s += '&num=1';
-                    window.location.href = s;
+            const toggleBankInfo = () => {
+                var paymentSelect = document.getElementById("paymentSelect");
+                var bankInfo = document.getElementById("bankInfo");
+
+                if (paymentSelect.value === "2") {
+                    bankInfo.style.display = "block";
+                } else {
+                    bankInfo.style.display = "none";
                 }
             };
 
-            const viewDetail = (id) => {
-                var url = 'viewItem?id=' + id;
-                window.location.href = url;
-            }
-        </script>
+            function validateAndSubmit() {
+                var fullname = document.getElementsByName("fullname")[0];
+                var address = document.getElementsByName("address")[0];
+                var phone = document.getElementsByName("phone")[0];
+                var accountNum = document.getElementsByName("accountNum")[0];
+                var paymentSelect = document.getElementById("paymentSelect");
+                var bankSelect = document.getElementById("bankSelect");
 
+                if (fullname.value === "") {
+                    showModal("Please fill out fullname value!");
+                } else if (address.value === "") {
+                    showModal("Please fill out address value!");
+                } else if (phone.value === "") {
+                    showModal("Please fill out phone value!");
+                } else {
+                    if (paymentSelect.value === "0") {
+                        showModal("Please select payment method!");
+                    } else if (paymentSelect.value === "1") {
+                        var bankInfo = document.getElementById("bankInfo");
+                        bankInfo.innerHTML = "";
+                        document.getElementById("f1").submit();
+                    } else {
+                        if (bankSelect.value === "0") {
+                            showModal("Please select your bank!");
+                        } else if (accountNum.value === "") {
+                            showModal("Please fill out your account number !");
+                        } else {
+                            document.getElementById("f1").submit();
+                        }
+                    }
+                }
+            }
+
+            function showModal(message) {
+                var modal = document.getElementById("modal");
+                var modalMessage = document.getElementById("modalMessage");
+
+                modalMessage.innerText = message;
+                modal.classList.add("show");
+
+                setTimeout(function () {
+                    closeModal();
+                }, 1500);
+            }
+
+            function closeModal() {
+                var modal = document.getElementById("modal");
+                modal.classList.remove("show");
+            }
+
+            const fetchApi = async (api) => {
+                const response = await fetch(api);
+                const data = await response.json();
+                return data;
+            };
+
+            const getBank = async () => {
+                const dataAPI = await fetchApi("https://api.vietqr.io/v2/banks");
+                let arrHTML = dataAPI.data.map((it) => {
+                    return '<option value="' + it.code + '">' + it.name + '</option>';
+                });
+                arrHTML.unshift('<option value="0">-- Select --</option>');
+
+                const bankElement = document.getElementById('bankSelect');
+                bankElement.innerHTML = arrHTML.join("");
+            };
+
+            getBank();
+
+            var selectBank = document.getElementById('bankSelect');
+            var inputBankName = document.getElementById('bankName');
+            selectBank.addEventListener('change', (e) => {
+                inputBankName.value = e.srcElement.selectedOptions[0].label;
+            });
+        </script>
     </body>
 </html>

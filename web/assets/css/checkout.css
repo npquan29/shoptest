@@ -1,0 +1,258 @@
+/* banner */
+.banner {
+    background-image: url(../image/bannershop.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+}
+
+.banner::before {
+    content: "";
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffffa3;
+    z-index: 0;
+}
+
+.banner__main {
+    position: relative;
+    padding: 120px 0;
+    text-align: center;
+}
+
+.banner__title {
+    color: #000;
+    font-size: 48px;
+    font-weight: 600;
+}
+
+.banner__url {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.banner__url li {
+    margin: 10px 5px;
+}
+
+/* End banner */
+
+/* order */
+.order {
+    padding: 80px 0;
+}
+
+.order__title {
+    font-size: 36px;
+    margin: 0;
+    padding-top: 0;
+    padding-bottom: 30px;
+    letter-spacing: 0.5px;
+}
+
+.main {
+    display: flex;
+    justify-content: space-between;
+}
+
+.main__left {
+    width: 50%;
+}
+
+.main__left .form-group {
+    margin-bottom: 20px;
+}
+
+.main__left .form-group h3 {
+    margin: 0;
+    margin-bottom: 5px;
+}
+
+.main__left .form-group h3 span {
+    color: red;
+}
+
+.main__left .form-group input,
+.main__left .form-group select {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.main__right {
+    flex: 1;
+    margin-left: 50px;
+}
+
+.main__right ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.main__right-headtitle {
+    display: flex;
+    justify-content: space-between;
+}
+
+.main__right-headtitle h3 {
+    color: #000;
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0;
+    margin-bottom: 15px;
+}
+
+.product__item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #ccc;
+}
+
+.product__detail {
+    display: flex;
+    max-width: 75%;
+}
+
+.product__image {
+    display: flex;
+    align-items: center;
+}
+
+.product__image img {
+    width: 60px;
+    aspect-ratio: 1 / 1;
+    border-radius: 8px;
+    display: block;
+}
+
+.product__info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 5px 10px;
+}
+
+.product__sub {
+    padding-top: 5px;
+}
+
+.main__right ul li.subtotal,
+.main__right ul li.totalOrder {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.main__right ul li.subtotal div {
+    font-size: 20px;
+}
+
+.main__right ul li.subtotal h3,
+.main__right ul li.totalOrder h3 {
+    margin: 0;
+    padding: 15px 0;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.main__right ul li.totalOrder h2 {
+    color: #B88E2F;
+    margin: 0;
+}
+
+.main__right button {
+    display: block;
+    margin: 30px auto;
+    padding: 20px 60px;
+    border: 1px solid #B88E2F;
+    color: #B88E2F;
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #fff;
+    border-radius: 10px;
+    transition: all .3s;
+}
+
+.main__right button:hover {
+    color: #fff;
+    background-color: #B88E2F;
+}
+
+/* End order */
+
+/* modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: -100%; 
+    left: -100%; 
+    padding: 20px 40px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: top 0.5s ease-in-out, left 0.5s ease-in-out;
+    z-index: 10000;
+    color: #B88E2F;
+    font-size: 20px;
+}
+
+.modal.show {
+    display: block;
+    top: 10px; 
+    left: 50%; 
+    transform: translate(-50%, 0); 
+}
+
+.modal h4 {
+    font-size: 20px;
+    letter-spacing: 0.5px;
+    margin: 20px 0;
+}
+/* End modal */
+
+
+/* service */
+.service {
+    padding: 80px 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #FAF3EA;
+}
+
+.service__item {
+    display: flex;
+    align-items: center;
+}
+
+.service__info {
+    margin-left: 10px;
+}
+
+.service__title {
+    color: #242424;
+    font-size: 25px;
+    font-weight: 600;
+    line-height: 37.5px;
+}
+
+.service__desc {
+    color: #898989;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 30px; 
+}
+/* End service */

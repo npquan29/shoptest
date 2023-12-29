@@ -15,6 +15,7 @@
         <url-pattern>/showCart</url-pattern>
         <url-pattern>/profileUser</url-pattern>
         <url-pattern>/deleteCartIt</url-pattern>
+        <url-pattern>/checkout</url-pattern>
     </filter-mapping>
     <filter-mapping>
         <filter-name>HomeFilter</filter-name>
@@ -72,6 +73,18 @@
         <servlet-name>ViewItemServlet</servlet-name>
         <servlet-class>controller.ViewItemServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CheckOutServlet</servlet-name>
+        <servlet-class>controller.CheckOutServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PlaceOrderServlet</servlet-name>
+        <servlet-class>controller.PlaceOrderServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>OrderCompleteServlet</servlet-name>
+        <servlet-class>controller.OrderCompleteServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -123,6 +136,18 @@
     <servlet-mapping>
         <servlet-name>ViewItemServlet</servlet-name>
         <url-pattern>/viewItem</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckOutServlet</servlet-name>
+        <url-pattern>/checkout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PlaceOrderServlet</servlet-name>
+        <url-pattern>/placeOrder</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrderCompleteServlet</servlet-name>
+        <url-pattern>/complete</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

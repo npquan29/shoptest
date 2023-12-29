@@ -109,7 +109,7 @@
                                     <span style="color: #B88E2F; font-weight: 500;">${requestScope.total}$</span>
                                 </li>
                             </ul>
-                            <a href="ordercomplete.html" class="shopping-cart__checkout">
+                            <a href="checkout" class="shopping-cart__checkout">
                                 Check Out
                             </a>
                         </div>

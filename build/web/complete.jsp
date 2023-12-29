@@ -1,6 +1,6 @@
 <%-- 
-    Document   : cart
-    Created on : Dec 28, 2023, 11:48:50 AM
+    Document   : complete
+    Created on : Dec 29, 2023, 9:39:34 PM
     Author     : lap
 --%>
 
@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Cart</title>
+        <title>Order Complete</title>
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
               integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
@@ -21,16 +21,17 @@
 
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
         <link rel="stylesheet" href="assets/css/base.css" />
-        <link rel="stylesheet" href="assets/css/cart.css">
+        <link rel="stylesheet" href="assets/css/ordercomplete.css">
     </head>
     <body>
+
         <jsp:include page="header.jsp" />
 
         <!-- banner -->
         <div class="banner">
             <div class="banner__main">
                 <div class="banner__title">
-                    Cart
+                    Order Completed
                 </div>
                 <ul class="banner__url">
                     <li>Home</li>
@@ -38,94 +39,34 @@
                         <i class="fa-solid fa-chevron-right"></i>
                     </li>
                     <li>
-                        Cart
+                        Order Completed
                     </li>
                 </ul>
             </div>
         </div>
         <!-- End banner -->
 
-        <!-- shopping-cart -->
-        <div class="shopping-cart">
+        <!-- completed -->
+        <div class="completed">
             <div class="container">
-                <c:set var="listItems" value="${requestScope.listCartIt}" />
-                <c:if test="${listItems.size() != 0}">
-                    <div class="shopping-cart__main">
-                        <div class="shopping-cart__left">
-                            <table>
-                                <tr>
-                                    <th>Product</th>
-                                    <th>Price</th>
-                                    <th>Quantity</th>
-                                    <th>Subtotal</th>
-                                    <th></th>
-                                </tr>
-                                <c:forEach var="it" items="${listItems}">
-                                    <tr>
-                                        <td class="shopping-cart__product">
-                                            <div>
-                                                <img src="${it.item.image}" alt="">
-                                                <span onclick="viewDetail('${it.item.id}')">${it.item.name}</span>
-                                            </div>
-                                        </td>
-                                        <td class="shopping-cart__price">
-                                            ${it.item.sell}$
-                                        </td>
-                                        <td class="shopping-cart__quantity">
-                                            <div>
-                                                <a class="shopping-cart__btn-substract"
-                                                   onclick="checkQuantity(1, '${it.item.id}', ${it.quantity}, ${it.item.stock})">
-                                                    <i class="fa-solid fa-minus"></i>
-                                                </a>
-                                                <span>${it.quantity}</span>
-                                                <a class="shopping-cart__btn-plus"
-                                                   onclick="checkQuantity(2, '${it.item.id}', ${it.quantity}, ${it.item.stock})">
-                                                    <i class="fa-solid fa-plus"></i>
-                                                </a>
-                                            </div>
-                                        </td>
-                                        <td class="shopping-cart__subtotal">
-                                            ${it.quantity * it.item.sell}$
-                                        </td>
-                                        <td class="shopping-cart__action">
-                                            <a href="deleteCartIt?id=${it.item.id}">
-                                                <i class="fa-regular fa-trash-can"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                </c:forEach>
-
-                            </table>
-                        </div>
-                        <div class="shopping-cart__right">
-                            <h1>Cart Totals</h1>
-                            <ul>
-                                <li>
-                                    <h4>Subtotal</h4>
-                                    <span>${requestScope.total}$</span>
-                                </li>
-                                <li>
-                                    <h4>Total</h4>
-                                    <span style="color: #B88E2F; font-weight: 500;">${requestScope.total}$</span>
-                                </li>
-                            </ul>
-                            <a href="checkout" class="shopping-cart__checkout">
-                                Check Out
-                            </a>
-                        </div>
+                <div class="completed__main">
+                    <div class="completed__icon">
+                        <i class="fa-regular fa-circle-check"></i>
                     </div>
-                </c:if>
-                <c:if test="${listItems.size() == 0}">
-                    <div class="cart-empty">
-                        <h1>There's no item in your cart.</h1>
+                    <div class="completed__title">Your Order Is Completed!</div>
+                    <div class="completed__desc">
+                        Thank you for your order! Your order is being processed and will be completed within 3-6
+                        hours. You will receive an email confirmation when your order is completed.
+                    </div>
+                    <div class="completed__btn">
                         <a href="products">
-                            Let's go shopping !
+                            Continue Shopping
                         </a>
                     </div>
-                </c:if>
+                </div>
             </div>
         </div>
-        <!-- End shopping-cart -->
+        <!-- End completed -->
 
         <!-- service -->
         <div class="service">
@@ -214,24 +155,6 @@
         <!-- End service -->
 
         <jsp:include page="footer.jsp" />
-
-        <script>
-            const checkQuantity = (op, id, quantity, stock) => {
-                var s = 'addCart?action=update&id=' + id;
-                if (op === 1 && quantity > 1) {
-                    s += '&num=-1';
-                    window.location.href = s;
-                } else if (op === 2 && quantity < stock) {
-                    s += '&num=1';
-                    window.location.href = s;
-                }
-            };
-
-            const viewDetail = (id) => {
-                var url = 'viewItem?id=' + id;
-                window.location.href = url;
-            }
-        </script>
 
     </body>
 </html>

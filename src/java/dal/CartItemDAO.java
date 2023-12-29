@@ -108,5 +108,16 @@ public class CartItemDAO extends DBContext {
             System.out.println(e);
         }
     }
+    
+    public void deleteCart(User user){
+        String sql = "delete from cartitem where userID = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, user.getId());
+            st.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
 
 }
