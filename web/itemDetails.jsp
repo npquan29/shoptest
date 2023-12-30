@@ -83,7 +83,7 @@
                         <div class="product__desc">
                             ${it.description}
                         </div>
-                        <form action="addCart" method="get">
+                        <form id="f1" action="addCart" method="get">
                             <input type="hidden" name="action" value="add">
                             <input type="hidden" name="id" value="${it.id}">
                             <div>
@@ -96,7 +96,7 @@
                                     <i class="fa-solid fa-plus"></i>
                                 </a>
                             </div>
-                            <button type="submit">Add to cart</button>
+                            <button type="button" onclick="checkAdd(${inCart}, ${it.stock})">Add to cart</button>
                         </form>
                     </div>
                 </div>
@@ -161,13 +161,14 @@
                 // Cập nhật giá trị mới
                 var newValue = currentValue + change;
 
-                // Giữ giá trị không dưới 1
-                newValue = Math.max(newValue, 1);
-
-                // Cập nhật giá trị vào thẻ span và input
-                spanElement.textContent = newValue;
-                inputElement.value = newValue;
-
+                if(newValue < 1){
+                    showModal("Cannot be reduced anymore!");
+                }
+                else{
+                    newValue = Math.max(newValue, 1);
+                    spanElement.textContent = newValue;
+                    inputElement.value = newValue;
+                }
             };
 
             const check = (inCart, inStock) => {
@@ -178,8 +179,16 @@
                     spanElement.textContent = currentValue + 1;
                     inputElement.value = currentValue + 1;
                 }
+            };
 
-            }
+            const checkAdd = (inCart, inStock) => {
+                var currentValue = parseInt(spanElement.textContent);
+                if (currentValue + inCart > inStock) {
+                    showModal("Can't add more products!");
+                } else {
+                    document.getElementById('f1').submit();
+                }
+            };
         </script>
     </body>
 </html>

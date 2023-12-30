@@ -215,21 +215,54 @@
 
         <jsp:include page="footer.jsp" />
 
+        <!-- modal -->
+        <div class="modal" id="modal">
+            <h4 id="modalMessage"></h4>
+        </div>
+        <!-- End modal -->
+
         <script>
             const checkQuantity = (op, id, quantity, stock) => {
                 var s = 'addCart?action=update&id=' + id;
-                if (op === 1 && quantity > 1) {
-                    s += '&num=-1';
-                    window.location.href = s;
-                } else if (op === 2 && quantity < stock) {
-                    s += '&num=1';
-                    window.location.href = s;
+                if (op === 1) {
+                    if(quantity > 1){
+                        s += '&num=-1';
+                        window.location.href = s;
+                    }
+                    else{
+                        showModal("Cannot be reduced anymore!");
+                    }
+                } else {
+                    if(quantity < stock){
+                        s += '&num=1';
+                        window.location.href = s;
+                    }
+                    else{
+                        showModal("Cannot be increased anymore!");
+                    }
                 }
             };
 
             const viewDetail = (id) => {
                 var url = 'viewItem?id=' + id;
                 window.location.href = url;
+            };
+
+            function showModal(message) {
+                var modal = document.getElementById("modal");
+                var modalMessage = document.getElementById("modalMessage");
+
+                modalMessage.innerText = message;
+                modal.classList.add("show");
+
+                setTimeout(function () {
+                    closeModal();
+                }, 1500);
+            }
+
+            function closeModal() {
+                var modal = document.getElementById("modal");
+                modal.classList.remove("show");
             }
         </script>
 
