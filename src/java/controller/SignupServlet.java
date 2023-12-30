@@ -83,7 +83,8 @@ public class SignupServlet extends HttpServlet {
         }
         else{                                                                    
             String id = createUserID();
-            User newUser = new User(id, username, password, fullname, email, address, phone, 1);
+            String image = "assets/image/ava1.jpg";
+            User newUser = new User(id, username, password, fullname, email, address, phone, image, 1);
             udb.insert(newUser);
             response.sendRedirect("home");
         }

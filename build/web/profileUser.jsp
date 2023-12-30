@@ -49,16 +49,28 @@
                 <h2>My profile</h2>
                 <c:set var="u" value="${sessionScope.account}" />
                 <form action="profileUser" method="post" class="profile__main" id="profileForm">
-                    <h3 class="profile__title">Username</h3>
-                    <div class="profile__username" disabled>${u.username}</div>
-                    <h3 class="profile__title">Full name</h3>
-                    <input class="profile__desc" disabled name="fullname" value="${u.fullname}" />
-                    <h3 class="profile__title">Email</h3>
-                    <input class="profile__desc" disabled name="email" value="${u.email}" />
-                    <h3 class="profile__title">Address</h3>
-                    <input class="profile__desc" disabled name="address" value="${u.address}" />
-                    <h3 class="profile__title">Phone</h3>
-                    <input class="profile__desc" disabled name="phone" value="${u.phone}" />
+                    <div class="box">
+                        <div class="box__info">
+                            <h3 class="profile__title">Username</h3>
+                            <div class="profile__username" disabled>${u.username}</div>
+                            <h3 class="profile__title">Full name</h3>
+                            <input class="profile__desc" disabled name="fullname" value="${u.fullname}" />
+                            <h3 class="profile__title">Email</h3>
+                            <input class="profile__desc" disabled name="email" value="${u.email}" />
+                            <h3 class="profile__title">Address</h3>
+                            <input class="profile__desc" disabled name="address" value="${u.address}" />
+                            <h3 class="profile__title">Phone</h3>
+                            <input class="profile__desc" disabled name="phone" value="${u.phone}" />
+                        </div>
+                        <div class="box__avatar">
+                            <h3>Avatar</h3>
+                            <input type="hidden" id="src" name="image" value="${u.image}">
+                            <img id="preview" src="${u.image}">
+                            <input style="display: none;" id="file-upload" name="myFile" type="file" accept="image/*" onchange="fileChange()">
+                            <button disabled type="button" id="click" onclick="activateFile()">Upload Image</button>
+                        </div>
+                    </div>
+
                     <div class="profile__btn">
                         <button id="edit" type="button" onclick="toggleEdit()">Edit</button>
                         <ul>
@@ -88,10 +100,12 @@
                 var editButton = document.getElementById("edit");
                 var cancelButton = document.getElementById("cancel");
                 var saveButton = document.getElementById("save");
+                var uploadButton = document.getElementById("click");
 
                 inputs.forEach((input) => {
                     input.disabled = false;
                 });
+                uploadButton.disabled = false;
 
                 editButton.style.display = "none";
 
@@ -105,16 +119,37 @@
                 var editButton = document.getElementById("edit");
                 var cancelButton = document.getElementById("cancel");
                 var saveButton = document.getElementById("save");
+                var uploadButton = document.getElementById("click");
 
                 inputs.forEach((input) => {
                     input.disabled = true;
                 });
+                uploadButton.disabled = true;
 
                 editButton.style.display = "inline-block";
 
                 cancelButton.style.display = "none";
                 saveButton.style.display = "none";
             };
+
+            const activateFile = () => {
+                document.getElementById("file-upload").click();
+            };
+
+            function fileChange() {
+                var fileInput = document.getElementById('file-upload');
+                var file = fileInput.files[0];
+                if (file) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        var imageData = e.target.result;
+                        document.getElementById('preview').src = imageData;
+                        document.getElementById('src').value = imageData;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            }
 
             document.addEventListener("DOMContentLoaded", function () {
                 // Đăng ký hàm toggleEdit và cancelEdit cho sự kiện click

@@ -60,9 +60,10 @@
                 </li>
                 <c:if test="${sessionScope.account != null}">
                     <li>
-                        <span class="user__dropdown"> 
-                            <i class="fa-regular fa-user"></i>
-                        </span>
+                        <div class="user__dropdown"> 
+                            <img src="${sessionScope.account.image}" alt="">
+                            <!-- <i class="fa-regular fa-user"></i> -->
+                        </div>
                         <c:if test="${sessionScope.account.role == 1}">
                             <!--<span>${sessionScope.account.username}</span>-->
                         </c:if>

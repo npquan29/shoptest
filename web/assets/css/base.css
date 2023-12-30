@@ -115,9 +115,13 @@ a {
     line-height: 18px;
 }
 
-.header__icon li span {
-    font-size: 20px;
+.header__icon li div img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
     cursor: pointer;
+    display: block;
 }
 
 .header__authen {

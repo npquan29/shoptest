@@ -68,10 +68,10 @@
                     </div>
                     <div class="detail-group">
                         <span>Payment</span>
-                        <c:if test="${order.status == 1}">
+                        <c:if test="${order.payment == 1}">
                             <div>Payment on delivery</div>
                         </c:if>
-                        <c:if test="${order.status == 2}">
+                        <c:if test="${order.payment == 2}">
                             <div>Payment by card</div>
                         </c:if>
                     </div>

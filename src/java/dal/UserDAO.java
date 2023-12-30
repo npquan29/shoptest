@@ -29,8 +29,9 @@ public class UserDAO extends DBContext{
                 String email = rs.getString("email");
                 String address = rs.getString("address");
                 String phone = rs.getString("phone");
+                String image = rs.getString("image");
                 int role = rs.getInt("role");
-                User x = new User(id, username, password, fullname, email, address, phone, role);
+                User x = new User(id, username, password, fullname, email, address, phone, image, role);
                 list.add(x);
             }
         } catch (Exception e) {
@@ -53,8 +54,9 @@ public class UserDAO extends DBContext{
                 String email = rs.getString("email");
                 String address = rs.getString("address");
                 String phone = rs.getString("phone");
+                String image = rs.getString("image");
                 int role = rs.getInt("role");
-                User x = new User(id, username_DB, password_DB, fullname, email, address, phone, role);
+                User x = new User(id, username_DB, password_DB, fullname, email, address, phone, image, role);
                 return x;
             }
         } catch (Exception e) {
@@ -78,8 +80,9 @@ public class UserDAO extends DBContext{
                 String email = rs.getString("email");
                 String address = rs.getString("address");
                 String phone = rs.getString("phone");
+                String image = rs.getString("image");
                 int role = rs.getInt("role");
-                User x = new User(id, username_DB, password_DB, fullname, email, address, phone, role);
+                User x = new User(id, username_DB, password_DB, fullname, email, address, phone, image, role);
                 return x;
             }
         } catch (Exception e) {
@@ -104,7 +107,7 @@ public class UserDAO extends DBContext{
     }
     
     public void insert(User x){
-        String sql = "insert into user values (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "insert into user values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, x.getId());
@@ -115,6 +118,7 @@ public class UserDAO extends DBContext{
             st.setString(6, x.getAddress());
             st.setString(7, x.getPhone());
             st.setInt(8, x.getRole());
+            st.setString(9, x.getImage());
             st.executeUpdate();
         } catch (Exception e) {
             System.out.println(e);
@@ -134,14 +138,15 @@ public class UserDAO extends DBContext{
     }
     
     public void updateUser(User x){
-        String sql = "update user set fullname = ?, email = ?, address = ?, phone = ? where ID = ?";
+        String sql = "update user set fullname = ?, email = ?, address = ?, phone = ?, image = ? where ID = ?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, x.getFullname());
             st.setString(2, x.getEmail());
             st.setString(3, x.getAddress());
             st.setString(4, x.getPhone());
-            st.setString(5, x.getId());
+            st.setString(5, x.getImage());
+            st.setString(6, x.getId());
             st.executeUpdate();
         } catch (Exception e) {
             System.out.println(e);

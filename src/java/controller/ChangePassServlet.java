@@ -79,7 +79,7 @@ public class ChangePassServlet extends HttpServlet {
             request.getRequestDispatcher("changePass.jsp").forward(request, response);
         }
         else{
-            User newUser = new User(x.getId(), username, newPass, x.getFullname(), x.getEmail(), x.getAddress(), x.getPhone(), x.getRole());
+            User newUser = new User(x.getId(), username, newPass, x.getFullname(), x.getEmail(), x.getAddress(), x.getPhone(), x.getImage(), x.getRole());
             udb.changePass(newUser);
             HttpSession session = request.getSession();
             session.setAttribute("account", newUser);

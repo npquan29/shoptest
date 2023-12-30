@@ -73,10 +73,11 @@ public class ProfileUserServlet extends HttpServlet {
         String email = request.getParameter("email");
         String address = request.getParameter("address");
         String phone = request.getParameter("phone");
+        String image = request.getParameter("image");
         HttpSession session = request.getSession();
         User u = (User) session.getAttribute("account");
         UserDAO udb = new UserDAO();
-        User newUser = new User(u.getId(), u.getUsername(), u.getPassword(), fullname, email, address, phone, u.getRole());
+        User newUser = new User(u.getId(), u.getUsername(), u.getPassword(), fullname, email, address, phone, image, u.getRole());
         udb.updateUser(newUser);
         session.setAttribute("account", newUser);
         response.sendRedirect("profileUser");
