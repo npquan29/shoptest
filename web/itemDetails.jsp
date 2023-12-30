@@ -80,6 +80,9 @@
                             <i class="fa-solid fa-star"></i>
                             <i class="fa-solid fa-star"></i>
                         </div>
+                        <div class="product__stock">
+                            Stock : ${it.stock}
+                        </div>
                         <div class="product__desc">
                             ${it.description}
                         </div>
@@ -161,10 +164,9 @@
                 // Cập nhật giá trị mới
                 var newValue = currentValue + change;
 
-                if(newValue < 1){
+                if (newValue < 1) {
                     showModal("Cannot be reduced anymore!");
-                }
-                else{
+                } else {
                     newValue = Math.max(newValue, 1);
                     spanElement.textContent = newValue;
                     inputElement.value = newValue;

@@ -17,7 +17,7 @@ import model.User;
 public class OrderDAO extends DBContext{
     
     public ArrayList<Order> getAll(){
-        String sql = "select * from order";
+        String sql = "select * from `order`";
         ArrayList<Order> list = new ArrayList<>();
         UserDAO udb = new UserDAO();
         try {
@@ -48,7 +48,7 @@ public class OrderDAO extends DBContext{
     }
     
     public ArrayList<Order> getListOrderByUser(User user){
-        String sql = "select * from order where userID = ?";
+        String sql = "select * from `order` where userID = ?";
         ArrayList<Order> list = new ArrayList<>();
         try {
             PreparedStatement st = connection.prepareStatement(sql);
@@ -78,7 +78,7 @@ public class OrderDAO extends DBContext{
     }
     
     public Order getOrderByID(String id){
-        String sql = "select * from order where ID = ?";
+        String sql = "select * from `order` where ID = ?";
         UserDAO udb = new UserDAO();
         try {
             PreparedStatement st = connection.prepareStatement(sql);

@@ -1,0 +1,146 @@
+/* details */
+.details {
+    display: flex;
+}
+
+.details__tab {
+    background-color: #F9F1E7;
+    padding: 30px 60px;
+    /* height: calc(100vh - 99.1px); */
+}
+
+.details__menu ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.details__menu ul li {
+    padding: 15px 0;
+    transition: all .3s;
+}
+
+.details__menu ul li a {
+    color: #000;
+    font-size: 18px;
+}
+
+.details__menu ul li:hover a {
+    color: #B88E2F;
+    font-size: 18px;
+}
+
+.details__right {
+    margin: 30px 0 30px 30px;
+    flex: 1;
+    background-color: #F9F1E7;
+    padding: 30px;
+    border-radius: 5px 0 0 5px;
+}
+
+.details__right h2 {
+    /* text-align: center; */
+    font-size: 24px;
+    margin: 0;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: #B88E2F;
+    margin-bottom: 20px;
+}
+
+.detail-group {
+    margin-bottom: 20px;
+}
+
+.detail-group span {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    font-size: 18px;
+    letter-spacing: 0.5px;
+}
+
+.detail-group div {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #afafaf;
+    border-radius: 4px;
+    background-color: #fff;
+}
+
+.details__list > span {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 10px;
+    font-size: 18px;
+    letter-spacing: 0.5px;
+}
+
+.details__table table{
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+.details__table table th, .details__table table td {
+    border: 1px solid #000;
+    text-align: left;
+    padding: 15px;
+} 
+
+.details__table table th {
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    border: none;
+}
+
+.details__table table td {
+    border: none;
+    border-top: 1px solid #afafaf;
+}
+
+.details__stt {
+    width: 7%;
+}
+
+.details__price, .details__quantity, .details__subtotal {
+    width: 14%;
+}
+
+.details__action {
+    width: 12%;
+}
+
+.details__action a {
+    padding: 10px 20px;
+    color: #000;
+    border: 1px solid #B88E2F;
+    border-radius: 5px;
+    transition: all .3s;
+}
+
+.details__action a:hover {
+    color: #fff;
+    background-color: #B88E2F;
+}
+
+.details__product div {
+    display: flex;
+    align-items: center;
+}
+
+.details__product div img {
+    width: 30%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    display: block;
+    margin-right: 30px;
+    border-radius: 10px;
+}
+
+.details__product span {
+    flex: 1;
+    text-align: left;
+}
+/* End details */

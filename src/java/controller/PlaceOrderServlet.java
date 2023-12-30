@@ -67,6 +67,19 @@ public class PlaceOrderServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        response.sendRedirect("home");
+    } 
+
+    /** 
+     * Handles the HTTP <code>POST</code> method.
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    throws ServletException, IOException {
         String fullname = request.getParameter("fullname");
         String address = request.getParameter("address");
         String phone = request.getParameter("phone");
@@ -106,8 +119,8 @@ public class PlaceOrderServlet extends HttpServlet {
         }
         cidb.deleteCart(u);
         session.setAttribute("numInCart", 0);
-        response.sendRedirect("complete");
-    } 
+        request.getRequestDispatcher("complete.jsp").forward(request, response);
+    }
     
     private String getDate(){
         Date currentDate = new Date();
@@ -128,19 +141,6 @@ public class PlaceOrderServlet extends HttpServlet {
         }
         res = "OD" + res;
         return res;
-    }
-
-    /** 
-     * Handles the HTTP <code>POST</code> method.
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        processRequest(request, response);
     }
 
     /** 

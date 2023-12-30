@@ -64,11 +64,11 @@
                             <i class="fa-regular fa-user"></i>
                         </span>
                         <c:if test="${sessionScope.account.role == 1}">
-                            <span>User</span>
+                            <!--<span>${sessionScope.account.username}</span>-->
                         </c:if>
                     </li>
                     <div class="menu__dropdown">
-                        <h4>${sessionScope.account.username}</h4>
+                        <h4>${sessionScope.account.fullname}</h4>
                         <ul>
                             <li>
                                 <a href="profileUser">Profile</a>

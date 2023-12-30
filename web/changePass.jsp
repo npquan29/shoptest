@@ -59,18 +59,17 @@
                     <input type="hidden" name="username" value="${sessionScope.account.username}"/>
                     <div class="form-group">
                         <label for="old">Old Password:</label>
-                        <input type="password" id="old" name="oldPass" required>
+                        <input type="password" id="old" name="oldPass" >
                     </div>
                     <div class="form-group">
                         <label for="new">New Password:</label>
-                        <input type="password" id="new" name="newPass" required>
+                        <input type="password" id="new" name="newPass">
                     </div>
                     <div class="form-group">
                         <label for="confirm">Confirm Password:</label>
-                        <input type="password" id="confirm" name="confirmPass" required>
+                        <input type="password" id="confirm" name="confirmPass" >
                     </div>
 
-                    <div id="confirmPass" class="error-changepass" style="display: none;"></div>
                     <button type="submit">Change Password</button>
                 </form>
             </div>
@@ -78,29 +77,60 @@
         <!-- End change-pass -->
 
         <jsp:include page="footer.jsp" />
+        
+        <!-- modal -->
+        <div class="modal" id="modal">
+            <h4 id="modalMessage"></h4>
+        </div>
+        <!-- End modal -->
 
         <script>
             const validatePass = (e) => {
                 e.preventDefault();
+                var oldPass = document.getElementById("old").value;
                 var newPass = document.getElementById("new").value;
                 var confirmPass = document.getElementById("confirm").value;
-                var confirmError = document.getElementById("confirmPass");
                 var formChange = document.getElementById("changeForm");
                 var check = true;
 
-                if(newPass !== confirmPass){
-                    confirmError.style.display = "block";
-                    confirmError.textContent = "Confirm Password does not match";
+                if(oldPass === ""){
+                    showModal("Please fill out old password!");
                     check = false;
                 }
-                else{
-                    confirmError.style.display = "none";
+                else if(newPass === ""){
+                    showModal("Please fill out new password!");
+                    check = false;
+                }
+                else if(confirmPass === ""){
+                    showModal("Please fill out confirm password!");
+                    check = false;
+                }
+                else if(newPass !== confirmPass){
+                    showModal("Confirm Password does not match");
+                    check = false;
                 }
 
                 if(check){
                     formChange.submit();
                 }
             };
+            
+            function showModal(message) {
+                var modal = document.getElementById("modal");
+                var modalMessage = document.getElementById("modalMessage");
+
+                modalMessage.innerText = message;
+                modal.classList.add("show");
+
+                setTimeout(function () {
+                    closeModal();
+                }, 1500);
+            }
+
+            function closeModal() {
+                var modal = document.getElementById("modal");
+                modal.classList.remove("show");
+            }
         </script>
     </body>
 </html>

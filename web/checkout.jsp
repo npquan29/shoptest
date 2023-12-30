@@ -48,7 +48,7 @@
                 <c:set var="list" value="${requestScope.listCheckOut}" />
                 <c:set var="total" value="${requestScope.amount}" /> 
                 <h1 class="order__title">Billing details</h1>
-                <form action="placeOrder" id="f1" class="main" method="get">
+                <form action="placeOrder" id="f1" class="main" method="post">
                     <div class="main__left">
                         <div class="form-group">
                             <h3>
