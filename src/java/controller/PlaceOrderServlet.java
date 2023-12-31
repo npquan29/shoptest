@@ -98,7 +98,7 @@ public class PlaceOrderServlet extends HttpServlet {
         User u = (User) session.getAttribute("account");
         ArrayList<CartItem> listItems = cidb.getListItemsByUser(u);
         double totalMoney = cidb.getTotalMoney(listItems) + 30;
-        String id = createOrderID();
+        String id = createOrderID(u);
         String orderDate = getDate();
         
         Order order = new Order(id, orderDate, totalMoney, payMethod, bankCode, bankName, accNum, fullname, address, phone, 30, 1, u);
@@ -129,17 +129,23 @@ public class PlaceOrderServlet extends HttpServlet {
         return formattedDate;
     }
     
-    private String createOrderID(){
-        int length = 10;
-        String digits = "0123456789";
-        String res = "";
-
-        Random random = new Random();
-        for (int i = 0; i < length; i++) {
-            int index = random.nextInt(digits.length());
-            res += digits.charAt(index);
-        }
-        res = "OD" + res;
+    private String createOrderID(User u){
+//        int length = 10;
+//        String digits = "0123456789";
+//        String res = "";
+//
+//        Random random = new Random();
+//        for (int i = 0; i < length; i++) {
+//            int index = random.nextInt(digits.length());
+//            res += digits.charAt(index);
+//        }
+//        res = "OD" + res;
+//        return res;
+        OrderDAO odb = new OrderDAO();
+        ArrayList<Order> list = odb.getListOrderByUser(u);
+        String res = "OD";
+        String id = String.format("%05d", list.size() + 1);
+        res += id + u.getId();
         return res;
     }
 

@@ -15,6 +15,8 @@ import jakarta.servlet.http.HttpSession;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Locale;
 import java.util.logging.Level;
@@ -76,6 +78,7 @@ public class PurchaseServlet extends HttpServlet {
                 x.setOrderDate(newDate);
             }
         }
+        Collections.reverse(list);
         request.setAttribute("listOrder", list);
         request.getRequestDispatcher("purchase.jsp").forward(request, response);
     }
