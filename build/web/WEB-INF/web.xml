@@ -19,6 +19,7 @@
         <url-pattern>/purchase</url-pattern>
         <url-pattern>/placeOrder</url-pattern>
         <url-pattern>/orderDetails</url-pattern>
+        <url-pattern>/comment</url-pattern>
     </filter-mapping>
     <filter-mapping>
         <filter-name>HomeFilter</filter-name>
@@ -92,6 +93,10 @@
         <servlet-name>OrderDetailsServlet</servlet-name>
         <servlet-class>controller.OrderDetailsServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CommentServlet</servlet-name>
+        <servlet-class>controller.CommentServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -159,6 +164,10 @@
     <servlet-mapping>
         <servlet-name>OrderDetailsServlet</servlet-name>
         <url-pattern>/orderDetails</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CommentServlet</servlet-name>
+        <url-pattern>/comment</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

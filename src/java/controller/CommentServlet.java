@@ -2,10 +2,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-
 package controller;
 
-import dal.CartItemDAO;
 import dal.CommentDAO;
 import dal.ItemDAO;
 import java.io.IOException;
@@ -15,12 +13,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Locale;
-import model.CartItem;
 import model.Comment;
 import model.Item;
 import model.User;
@@ -29,35 +24,38 @@ import model.User;
  *
  * @author lap
  */
-public class ViewItemServlet extends HttpServlet {
-   
-    /** 
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+public class CommentServlet extends HttpServlet {
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ViewItemServlet</title>");  
+            out.println("<title>Servlet CommentServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ViewItemServlet at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet CommentServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
-    } 
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
+    /**
      * Handles the HTTP <code>GET</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -65,53 +63,21 @@ public class ViewItemServlet extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         String id = request.getParameter("id");
-        ItemDAO idb = new ItemDAO();
-        Item it = idb.getItemByID(id);
-        CartItemDAO cidb = new CartItemDAO();
-        HttpSession session = request.getSession();
-        User u = (User) session.getAttribute("account");
-        CartItem cit = cidb.getItemByUser(u, id);
-        int inCart = 0;
-        if(cit != null) inCart = cit.getQuantity();
-        
-        CommentDAO cmdb = new CommentDAO();
-        ArrayList<Comment> listComment = cmdb.getCommentsByItem(it);
-        if(!listComment.isEmpty()){
-            for(Comment x : listComment){
-                String newDate = formatDateDB(x.getDate());
-                x.setDate(newDate);
-            }
+        if (id == null) {
+            response.sendRedirect("home");
+        } else {
+            ItemDAO idb = new ItemDAO();
+            Item it = idb.getItemByID(id);
+            request.setAttribute("item", it);
+            request.getRequestDispatcher("comment.jsp").forward(request, response);
         }
-        
-        int ratingAverage = (int) Math.round(it.getRating());
-        
-        if(ratingAverage == 0) ratingAverage = 5;
-        
-        request.setAttribute("stars", ratingAverage);
-        request.setAttribute("listComment", listComment);
-        request.setAttribute("inCart", inCart);
-        request.setAttribute("item", it);
-        request.getRequestDispatcher("itemDetails.jsp").forward(request, response);
-    } 
-    
-        private String formatDateDB(String dateString) {
-        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
-        SimpleDateFormat outputFormat = new SimpleDateFormat("dd MMMM yyyy", new Locale("en", "EN"));
-
-        Date date = new Date();
-        try {
-            date = inputFormat.parse(dateString);
-        } catch (ParseException ex) {
-            System.out.println(ex);
-        }
-        String formattedDate = outputFormat.format(date);
-        return formattedDate;
     }
 
-    /** 
+    /**
      * Handles the HTTP <code>POST</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -119,12 +85,54 @@ public class ViewItemServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        processRequest(request, response);
+            throws ServletException, IOException {
+        String id = request.getParameter("id");
+        String comment = request.getParameter("comment");
+        String rating = request.getParameter("rating");
+
+        int star = (rating == null) ? 5 : Integer.valueOf(rating);
+
+        HttpSession session = request.getSession();
+        User u = (User) session.getAttribute("account");
+        ItemDAO idb = new ItemDAO();
+        Item it = idb.getItemByID(id);
+        CommentDAO cdb = new CommentDAO();
+        ArrayList<Comment> list = cdb.getCommentsByItem(it);
+        String commentID = createCommentID(list, it);
+        String createDate = getDate();
+        Comment c = new Comment(commentID, comment, createDate, star, it, u);
+        CommentDAO cmdb = new CommentDAO();
+        cmdb.insertComment(c);
+        ArrayList<Comment> listNew = cdb.getCommentsByItem(it);
+        idb.updateRating(it, getRating(listNew));
+        response.sendRedirect("home");
     }
 
-    /** 
+    private String createCommentID(ArrayList<Comment> list, Item it) {
+        String res = "CM";
+        String id = String.format("%05d", list.size() + 1);
+        res += id + it.getId();
+        return res;
+    }
+
+    private String getDate() {
+        Date currentDate = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String formattedDate = dateFormat.format(currentDate);
+        return formattedDate;
+    }
+    
+    private double getRating(ArrayList<Comment> list){
+        double res = 0;
+        for(Comment x : list){
+            res += (x.getRating() * 1.0 / list.size());
+        }
+        double roundedNumber = Math.round(res * 10.0) / 10.0;
+        return roundedNumber;
+    }
+    /**
      * Returns a short description of the servlet.
+     *
      * @return a String containing servlet description
      */
     @Override

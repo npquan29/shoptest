@@ -16,19 +16,21 @@ public class Item {
     private double cost;
     private double sell;
     private String image;
+    private double rating;
     private String description;
     private Category category;
 
     public Item() {
     }
 
-    public Item(String id, String name, int stock, double cost, double sell, String image, String description, Category category) {
+    public Item(String id, String name, int stock, double cost, double sell, String image, double rating, String description, Category category) {
         this.id = id;
         this.name = name;
         this.stock = stock;
         this.cost = cost;
         this.sell = sell;
         this.image = image;
+        this.rating = rating;
         this.description = description;
         this.category = category;
     }
@@ -79,6 +81,14 @@ public class Item {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public double getRating() {
+        return rating;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
     }
 
     public String getDescription() {

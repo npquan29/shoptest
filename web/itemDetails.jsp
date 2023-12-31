@@ -74,11 +74,12 @@
                             Price: ${it.sell}$
                         </div>
                         <div class="product__rating">
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
+                            <c:forEach begin="1" end="${requestScope.stars}" >
+                                <i class="fa-solid fa-star"></i>
+                            </c:forEach>
+                            <c:forEach begin="1" end="${5 - requestScope.stars}" >
+                                <i class="fa-solid fa-star" style="color: #9F9F9F;"></i>
+                            </c:forEach>
                         </div>
                         <div class="product__stock">
                             Stock : ${it.stock}
@@ -122,6 +123,41 @@
             </div>
         </div>
         <!-- End description -->
+
+        <c:set var="list" value="${requestScope.listComment}" />
+        <c:if test="${list.size() != 0}">
+            <!-- comment -->
+            <div class="comment">
+                <div class="container">
+                    <div class="comment__main">
+                        <h3>Customer feedback</h3>
+                        <ul class="comment__list">
+                            <c:forEach var="cm" items="${list}">   
+                                <li>
+                                    <div class="comment__user">
+                                        <div class="comment__info">
+                                            <img src="${cm.user.image}" alt="">
+                                            <span>${cm.user.fullname}</span>
+                                        </div>
+                                        <div class="comment__date">
+                                            Create: ${cm.date}
+                                        </div>
+                                    </div>
+                                    <div class="comment__rating">
+                                        Rating: ${cm.rating} / 5
+                                        <i class="fa-solid fa-star"></i>
+                                    </div>
+                                    <div class="comment__desc">
+                                        ${cm.content}
+                                    </div>
+                                </li>
+                            </c:forEach>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- End comment -->
+        </c:if>
 
         <jsp:include page="footer.jsp" />
 

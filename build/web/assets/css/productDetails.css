@@ -258,9 +258,15 @@
 .comment__user {
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
 
-.comment__user img {
+.comment__info {
+    display: flex;
+    align-items: center;
+}
+
+.comment__info img {
     width: 50px;
     height: 50px;
     border-radius: 50%;
@@ -268,14 +274,25 @@
     margin-right: 20px;
 }
 
-.comment__user span {
+.comment__info span {
     font-size: 18px;
     font-weight: 500;
 }
 
-.comment__desc {
-    margin-top: 5px;
+.comment__date {
+    font-size: 14px;
+}
+
+.comment__rating, .comment__desc {
     padding-left: 70px;
+}
+
+.comment__rating {
+    margin: 10px 0;
+}
+
+.comment__rating i {
+    color: #FFC700;
 }
 /* End comment */
 

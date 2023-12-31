@@ -30,6 +30,7 @@ public class ItemDAO extends DBContext {
                 x.setStock(rs.getInt("stock"));
                 x.setCost(rs.getDouble("costPrice"));
                 x.setSell(rs.getDouble("sellPrice"));
+                x.setRating(rs.getDouble("rating"));
                 x.setImage(rs.getString("image"));
                 x.setDescription(rs.getString("description"));
                 Category c = cdb.get(rs.getString("categoryID"));
@@ -56,6 +57,7 @@ public class ItemDAO extends DBContext {
                 x.setStock(rs.getInt("stock"));
                 x.setCost(rs.getDouble("costPrice"));
                 x.setSell(rs.getDouble("sellPrice"));
+                x.setRating(rs.getDouble("rating"));
                 x.setImage(rs.getString("image"));
                 x.setDescription(rs.getString("description"));
                 Category c = cdb.get(rs.getString("categoryID"));
@@ -126,6 +128,7 @@ public class ItemDAO extends DBContext {
                 x.setStock(rs.getInt("stock"));
                 x.setCost(rs.getDouble("costPrice"));
                 x.setSell(rs.getDouble("sellPrice"));
+                x.setRating(rs.getDouble("rating"));
                 x.setImage(rs.getString("image"));
                 x.setDescription(rs.getString("description"));
                 Category c = cdb.get(rs.getString("categoryID"));
@@ -163,12 +166,24 @@ public class ItemDAO extends DBContext {
         }
         return filterItems(catID, pr1, pr2, sortType);
     }
-    
-    public void updateQuantity(Item it, int num){
+
+    public void updateQuantity(Item it, int num) {
         String sql = "update item set stock = stock + ? where ID = ?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, num);
+            st.setString(2, it.getId());
+            st.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public void updateRating(Item it, double rate) {
+        String sql = "update item set rating = ? where ID = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setDouble(1, rate);
             st.setString(2, it.getId());
             st.executeUpdate();
         } catch (Exception e) {
