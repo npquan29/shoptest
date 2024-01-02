@@ -1,0 +1,286 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+:root {
+    --font: 'Inter', sans-serif;;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font);
+    background-color: #F9F9FC;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* container */
+.container {
+    max-width: 1140px;
+    margin: 0 auto;
+}
+/* End container */
+
+/* header */
+.header {
+    padding: 15px 30px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #edf2f9;
+    position: sticky;
+    z-index: 999;
+    top: 0;
+    background-color: #fff;
+}
+
+.header__logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header__logo img {
+    display: block;
+}
+
+.header__logo span {
+    font-size: 28px;
+    margin-left: 10px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: #000;
+}
+
+.header__nav {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex: 1;
+}
+
+.header__icon {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    margin-right: 20px;
+}
+
+.header__icon li {
+    font-size: 24px;
+    margin: 0 15px;
+}
+
+.header__manager {
+    display: flex;
+    align-items: center;
+    border-left: 1px solid #edf2f9;
+}
+
+.header__avatar {
+    width: 50px;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-left: 20px;
+    margin-right: 12px;
+}
+
+.header__avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.header__info .header__name {
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.header__info span {
+    display: block;
+    font-size: 14px;
+}
+/* End dheader */
+
+/* main */
+.main {
+    display: flex;
+    background-color: #F9F9FC;
+}
+
+.main__sidebar {
+    padding: 30px;
+    background-color: #fff;
+    position: fixed;
+    height: calc(100vh - 80.8px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-right: 1px solid #edf2f9;
+}
+
+.main__sidebar ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.main__sidebar ul li {
+    margin-bottom: 10px;
+}
+
+.main__sidebar ul li a{
+    display: flex;
+    align-items: center;
+    padding: 8px 60px 8px 20px;
+    border-radius: 10px;
+    color: #000;
+    background-color: #fff;
+    transition: all .3s;
+}
+
+.main__sidebar ul li a:hover{
+    color: #fff;
+    background-color: #B88E2F;
+}
+
+.main__sidebar ul li span {
+    font-size: 28px;
+    margin-right: 10px;
+}
+
+.main__sidebar ul li h3 {
+    margin: 0;
+    letter-spacing: 0.5px;
+    font-weight: 500;
+}
+
+.main__logout a {
+    display: flex;
+    align-items: center;
+    padding: 0 60px 0 20px;
+    color: #000;
+    transition: all .3s;
+}
+
+.main__logout a:hover {
+    color: #B88E2F;
+}
+
+.main__logout span {
+    font-size: 28px;
+    margin-right: 10px;
+}
+
+.main__logout h3 {
+    margin: 0;
+    letter-spacing: 0.5px;
+    font-weight: 500;
+}
+
+.main__right {
+    margin-left: 279.93px;
+    padding: 40px 30px;
+}
+
+.main__team {
+    display: flex;
+    align-items: center;
+}
+
+.main__banner {
+    width: 50%;
+    position: relative;
+}
+
+.main__banner::before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background-color: #FFF3E3;
+    border-radius: 10px;
+}
+
+.main__img {
+    width: 100%;
+    aspect-ratio: 1.42;
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.main__img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.main__content {
+    flex: 1;
+    margin-left: 50px;
+}
+
+.main__content-title {
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 48px; 
+    margin-bottom: 20px;
+}
+
+.main__content ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.main__content ul li {
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+}
+
+.main__content ul li i {
+    font-size: 30px;
+    color: #B88E2F;
+}
+
+.main__content ul li span {
+    margin-left: 10px;
+    font-size: 20px;
+}
+
+.main__slogan {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.main__slogan h1 {
+    font-size: 40px;
+    margin: 0;
+    letter-spacing: 0.5px;
+}
+
+.main__slogan p {
+    font-size: 20px;
+    margin-top: 10px;
+    margin-bottom: 25px;
+    letter-spacing: 0.5px;
+}
+
+.main__slogan span {
+    font-size: 18px;
+    letter-spacing: 0.5px;
+    font-style: italic;
+    font-weight: 500;
+}
+/* End main */
+

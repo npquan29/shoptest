@@ -8,6 +8,26 @@
         <filter-name>LoginFilter</filter-name>
         <filter-class>filter.LoginFilter</filter-class>
     </filter>
+    <filter>
+        <filter-name>RoleFilter</filter-name>
+        <filter-class>filter.RoleFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>RoleFilter</filter-name>
+        <url-pattern>/admin</url-pattern>
+        <url-pattern>/listItemManager</url-pattern>
+        <url-pattern>/addItem</url-pattern>
+        <url-pattern>/updateItem</url-pattern>
+        <url-pattern>/deleteItem</url-pattern>
+        <url-pattern>/categoryManager</url-pattern>
+        <url-pattern>/addCategory</url-pattern>
+        <url-pattern>/updateCategory</url-pattern>
+        <url-pattern>/deleteCategory</url-pattern>
+        <url-pattern>/userManager</url-pattern>
+        <url-pattern>/addUser</url-pattern>
+        <url-pattern>/updateUser</url-pattern>
+        <url-pattern>/deleteUser</url-pattern>
+    </filter-mapping>
     <filter-mapping>
         <filter-name>LoginFilter</filter-name>
         <url-pattern>/addCart</url-pattern>
@@ -97,6 +117,58 @@
         <servlet-name>CommentServlet</servlet-name>
         <servlet-class>controller.CommentServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AdminServlet</servlet-name>
+        <servlet-class>controller.AdminServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListItemManagerServlet</servlet-name>
+        <servlet-class>controller.ListItemManagerServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddItemServlet</servlet-name>
+        <servlet-class>controller.AddItemServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateItemServlet</servlet-name>
+        <servlet-class>controller.UpdateItemServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteItemServlet</servlet-name>
+        <servlet-class>controller.DeleteItemServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListCategoryManagerServlet</servlet-name>
+        <servlet-class>controller.ListCategoryManagerServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddCategoryServlet</servlet-name>
+        <servlet-class>controller.AddCategoryServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateCategoryServlet</servlet-name>
+        <servlet-class>controller.UpdateCategoryServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteCategoryServlet</servlet-name>
+        <servlet-class>controller.DeleteCategoryServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListUserManagerServlet</servlet-name>
+        <servlet-class>controller.ListUserManagerServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddUserServlet</servlet-name>
+        <servlet-class>controller.AddUserServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateUserServlet</servlet-name>
+        <servlet-class>controller.UpdateUserServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteUserServlet</servlet-name>
+        <servlet-class>controller.DeleteUserServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -168,6 +240,58 @@
     <servlet-mapping>
         <servlet-name>CommentServlet</servlet-name>
         <url-pattern>/comment</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminServlet</servlet-name>
+        <url-pattern>/admin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListItemManagerServlet</servlet-name>
+        <url-pattern>/listItemManager</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddItemServlet</servlet-name>
+        <url-pattern>/addItem</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateItemServlet</servlet-name>
+        <url-pattern>/updateItem</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteItemServlet</servlet-name>
+        <url-pattern>/deleteItem</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListCategoryManagerServlet</servlet-name>
+        <url-pattern>/categoryManager</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddCategoryServlet</servlet-name>
+        <url-pattern>/addCategory</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateCategoryServlet</servlet-name>
+        <url-pattern>/updateCategory</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteCategoryServlet</servlet-name>
+        <url-pattern>/deleteCategory</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListUserManagerServlet</servlet-name>
+        <url-pattern>/userManager</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddUserServlet</servlet-name>
+        <url-pattern>/addUser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateUserServlet</servlet-name>
+        <url-pattern>/updateUser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteUserServlet</servlet-name>
+        <url-pattern>/deleteUser</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

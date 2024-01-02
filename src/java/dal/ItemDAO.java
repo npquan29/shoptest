@@ -193,4 +193,52 @@ public class ItemDAO extends DBContext {
             System.out.println(e);
         }
     }
+    
+    public void addItem(Item it){
+        String sql = "insert into item values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, it.getId());
+            st.setString(2, it.getName());
+            st.setInt(3, it.getStock());
+            st.setDouble(4, it.getCost());
+            st.setDouble(5, it.getSell());
+            st.setString(6, it.getCategory().getId());
+            st.setString(7, it.getImage());
+            st.setDouble(8, it.getRating());
+            st.setString(9, it.getDescription());
+            st.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+    
+    public void deleteItem(String id){
+        String sql = "delete from item where ID = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, id);
+            st.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+    
+    public void updateItem(Item it){
+        String sql = "update item set name = ?, stock = ?, costPrice = ?, sellPrice = ?, categoryID = ?, image = ?, description = ? where ID = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, it.getName());
+            st.setInt(2, it.getStock());
+            st.setDouble(3, it.getCost());
+            st.setDouble(4, it.getSell());
+            st.setString(5, it.getCategory().getId());
+            st.setString(6, it.getImage());
+            st.setString(7, it.getDescription());
+            st.setString(8, it.getId());
+            st.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
 }

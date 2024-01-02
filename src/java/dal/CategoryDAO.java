@@ -13,8 +13,9 @@ import model.Category;
  *
  * @author lap
  */
-public class CategoryDAO extends DBContext{
-    public ArrayList<Category> getAll(){
+public class CategoryDAO extends DBContext {
+
+    public ArrayList<Category> getAll() {
         String sql = "select * from category";
         ArrayList<Category> list = new ArrayList<>();
         try {
@@ -29,8 +30,8 @@ public class CategoryDAO extends DBContext{
         }
         return list;
     }
-    
-    public Category get(String id){
+
+    public Category get(String id) {
         String sql = "select * from category where ID = ?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
@@ -44,5 +45,40 @@ public class CategoryDAO extends DBContext{
             System.out.println(e);
         }
         return null;
+    }
+
+    public void addCategory(Category c) {
+        String sql = "insert into category values (?, ?)";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, c.getId());
+            st.setString(2, c.getName());
+            st.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+    
+    public void deleteCategory(String id){
+        String sql = "delete from category where ID = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, id);
+            st.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+    
+    public void updateCategory(Category c){
+        String sql = "update category set name = ? where ID = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, c.getName());
+            st.setString(2, c.getId());
+            st.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 }

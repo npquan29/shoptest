@@ -17,6 +17,8 @@ import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import model.User;
 
 /**
  *
@@ -105,10 +107,17 @@ public class HomeFilter implements Filter {
 	
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
+        HttpSession session = req.getSession();
         String url = req.getServletPath();
         
         if(url.endsWith(".jsp")){
-            res.sendRedirect("home");
+            User u = (User) session.getAttribute("account");
+            if(u == null || u.getRole() == 1){
+                res.sendRedirect("home");
+            }
+            else{
+                res.sendRedirect("admin");
+            }
         }
         
 	Throwable problem = null;

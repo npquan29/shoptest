@@ -16,7 +16,32 @@ import model.User;
 public class UserDAO extends DBContext{
     
     public ArrayList<User> getAllCustomers(){
-        String sql  = "select * from user where role = 1";
+        String sql  = "select * from `user` where role = 1";
+        ArrayList<User> list = new ArrayList<>();
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while(rs.next()){
+                String id = rs.getString("ID");
+                String username = rs.getString("username");
+                String password = rs.getString("password");
+                String fullname = rs.getString("fullname");
+                String email = rs.getString("email");
+                String address = rs.getString("address");
+                String phone = rs.getString("phone");
+                String image = rs.getString("image");
+                int role = rs.getInt("role");
+                User x = new User(id, username, password, fullname, email, address, phone, image, role);
+                list.add(x);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+    
+    public ArrayList<User> getAllAccounts(){
+        String sql = "select * from `user`";
         ArrayList<User> list = new ArrayList<>();
         try {
             PreparedStatement st = connection.prepareStatement(sql);
@@ -107,7 +132,7 @@ public class UserDAO extends DBContext{
     }
     
     public void insert(User x){
-        String sql = "insert into user values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "insert into `user` values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, x.getId());
@@ -147,6 +172,17 @@ public class UserDAO extends DBContext{
             st.setString(4, x.getPhone());
             st.setString(5, x.getImage());
             st.setString(6, x.getId());
+            st.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+    
+    public void deleteUser(String id){
+        String sql = "delete from `user` where ID = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, id);
             st.executeUpdate();
         } catch (Exception e) {
             System.out.println(e);
