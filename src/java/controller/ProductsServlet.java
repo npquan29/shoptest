@@ -65,6 +65,7 @@ public class ProductsServlet extends HttpServlet {
         ItemDAO idb = new ItemDAO();
 
         // Danh sách tham số từ URL
+        String name = request.getParameter("name");
         String[] categoryParam = request.getParameterValues("category");
         String[] priceParam = request.getParameterValues("price");
         String sortType = request.getParameter("sortType");
@@ -106,6 +107,11 @@ public class ProductsServlet extends HttpServlet {
         if (numberPerPage == null) {
             numberPerPage = "6";
         }
+
+        // Lấy name để tìm kiếm theo tên
+        if(name != null && !name.equals("")){
+            url += "name=" + name + "&";
+        }
         
         // Đánh dấu categoryID và nối categoryID vào URL 
         if (categoryParam != null) {
@@ -123,17 +129,17 @@ public class ProductsServlet extends HttpServlet {
             }
             if(priceParam.length < 4){
                 for(int i = 0; i < priceParam.length; i++){
-                    ArrayList<Item> listTMP = idb.getItemsByPrice(categoryParam, priceParam[i], sortType);
+                    ArrayList<Item> listTMP = idb.getItemsByPrice(categoryParam, name, priceParam[i], sortType);
                     listItem.addAll(listTMP);
                 }
             }
             else{
-                ArrayList<Item> listNoPrice = idb.getItemsByPrice(categoryParam, "", sortType);
+                ArrayList<Item> listNoPrice = idb.getItemsByPrice(categoryParam, name, "", sortType);
                 listItem.addAll(listNoPrice);
             }
         }
         else{
-            ArrayList<Item> listNoPrice = idb.getItemsByPrice(categoryParam, "", sortType);
+            ArrayList<Item> listNoPrice = idb.getItemsByPrice(categoryParam, name, "", sortType);
             listItem.addAll(listNoPrice);
         }
         
@@ -165,6 +171,7 @@ public class ProductsServlet extends HttpServlet {
         request.setAttribute("curPage", page);
         request.setAttribute("numPages", numPages);
         request.setAttribute("numItem", listItem.size());
+        request.setAttribute("key", name);
         request.setAttribute("listCat", listCategory);
         request.setAttribute("listItem", listPerPage);
         

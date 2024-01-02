@@ -49,129 +49,138 @@
         <div class="products">
             <div class="container">
                 <form id="f1" action="products" class="products__main" method="get">
-                    <div class="products__tab-left">
-                        <div class="products__box">
-                            <h3>Category</h3>
-                            <ul>
-                                <c:set var = "listCate" value = "${requestScope.listCat}"/>
-                                <c:set var="checkCat" value = "${requestScope.isCheckCat}" />
-                                <c:forEach var="i" begin="0" end="${listCate.size() - 1}">
-                                    <li>
-                                        <c:set var="it" value="${listCate[i]}" />
-                                        <input id="${it.id}" type="checkbox" 
-                                               ${checkCat[i] == true ? "checked" : ""}
-                                               name="category" value="${it.id}" 
-                                               onclick="handleSubmit()">
-                                        <label for="${it.id}">${it.name}</label>
-                                    </li>
-                                </c:forEach>
-                            </ul>
-                        </div>
-                        <div class="products__box">
-                            <h3>Price</h3>
-                            <ul>
-                                <c:set var="priceList" value="${requestScope.listPrice}" />
-                                <c:set var="checkPrice" value = "${requestScope.isCheckPrice}" />
-                                <c:forEach var="i" begin="0" end="${priceList.size() - 1}">
-                                    <li>
-                                        <c:set var="it" value="${priceList.get(i)}" />
-                                        <input id="${i + 1}" type="checkbox" 
-                                               ${checkPrice[i] == true ? "checked" : ""}
-                                               name="price" value="${i + 1}" 
-                                               onclick="handleSubmit()">
-                                        <label for="${i + 1}">${it}</label>
-                                    </li>
-                                </c:forEach>
-                            </ul>
-                        </div>
+                    <div class="product__search">
+                        <c:set var="txt" value="${requestScope.key}" />
+                        <input type="text" name="name" 
+                               value="${txt != null ? txt : ''}" 
+                               placeholder="Search by name...">
+                        <button type="submit">Search</button>
                     </div>
-
-                    <div class="products__tab-right">
-                        <div class="products__filter">
-                            <span>${requestScope.numItem} Items</span>
-                            <div class="products__sort">
-                                <span>Sort By:</span>
-                                <select id="sortType" name="sortType">
-                                    <c:set var="option" value="${param.sortType == null ? '1' : param.sortType}" />
-                                    <c:set var="sortList" value="${requestScope.listSort}" />
-                                    <c:forEach var="i" begin="0" end="${sortList.size() - 1}">
-                                        <option value="${i + 1}" 
-                                                ${option == i + 1 ? "selected" : ""}>
-                                            ${sortList.get(i)}
-                                        </option>
+                    <div class="product__content">
+                        <div class="products__tab-left">
+                            <div class="products__box">
+                                <h3>Category</h3>
+                                <ul>
+                                    <c:set var = "listCate" value = "${requestScope.listCat}"/>
+                                    <c:set var="checkCat" value = "${requestScope.isCheckCat}" />
+                                    <c:forEach var="i" begin="0" end="${listCate.size() - 1}">
+                                        <li>
+                                            <c:set var="it" value="${listCate[i]}" />
+                                            <input id="${it.id}" type="checkbox" 
+                                                   ${checkCat[i] == true ? "checked" : ""}
+                                                   name="category" value="${it.id}" 
+                                                   onclick="handleSubmit()">
+                                            <label for="${it.id}">${it.name}</label>
+                                        </li>
                                     </c:forEach>
-                                </select>
+                                </ul>
                             </div>
-                            <div class="products__number">
-                                <span>Per Page:</span>
-                                <select id="perPage" name="numberPerPage">
-                                    <c:set var="num" value="${param.numberPerPage == null ? '6' : param.numberPerPage}" />
-                                    <c:set var="perPageList" value="${requestScope.listPerPage}" />
-                                    <c:forEach var="i" begin="0" end="${perPageList.size() - 1}">
-                                        <option value="${perPageList.get(i)}" 
-                                                ${num == perPageList.get(i) ? "selected" : ""}>
-                                            ${perPageList.get(i)}
-                                        </option>
+                            <div class="products__box">
+                                <h3>Price</h3>
+                                <ul>
+                                    <c:set var="priceList" value="${requestScope.listPrice}" />
+                                    <c:set var="checkPrice" value = "${requestScope.isCheckPrice}" />
+                                    <c:forEach var="i" begin="0" end="${priceList.size() - 1}">
+                                        <li>
+                                            <c:set var="it" value="${priceList.get(i)}" />
+                                            <input id="${i + 1}" type="checkbox" 
+                                                   ${checkPrice[i] == true ? "checked" : ""}
+                                                   name="price" value="${i + 1}" 
+                                                   onclick="handleSubmit()">
+                                            <label for="${i + 1}">${it}</label>
+                                        </li>
                                     </c:forEach>
-                                </select>
-                            </div>
-                            <div class="products__display">
-                                <div>
-                                    <i class='bx bxs-grid'></i>
-                                </div>
-                                <div>
-                                    <i class='bx bx-menu'></i>
-                                </div>
+                                </ul>
                             </div>
                         </div>
-
-                        <div class="products__list">
-                            <c:forEach var="it" items="${requestScope.listItem}">
-                                <div class="products__item">
-                                    <div class="products__image">
-                                        <img src="${it.image}" alt="">
+    
+                        <div class="products__tab-right">
+                            <div class="products__filter">
+                                <span>${requestScope.numItem} Items</span>
+                                <div class="products__sort">
+                                    <span>Sort By:</span>
+                                    <select id="sortType" name="sortType">
+                                        <c:set var="option" value="${param.sortType == null ? '1' : param.sortType}" />
+                                        <c:set var="sortList" value="${requestScope.listSort}" />
+                                        <c:forEach var="i" begin="0" end="${sortList.size() - 1}">
+                                            <option value="${i + 1}" 
+                                                    ${option == i + 1 ? "selected" : ""}>
+                                                ${sortList.get(i)}
+                                            </option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                                <div class="products__number">
+                                    <span>Per Page:</span>
+                                    <select id="perPage" name="numberPerPage">
+                                        <c:set var="num" value="${param.numberPerPage == null ? '6' : param.numberPerPage}" />
+                                        <c:set var="perPageList" value="${requestScope.listPerPage}" />
+                                        <c:forEach var="i" begin="0" end="${perPageList.size() - 1}">
+                                            <option value="${perPageList.get(i)}" 
+                                                    ${num == perPageList.get(i) ? "selected" : ""}>
+                                                ${perPageList.get(i)}
+                                            </option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                                <div class="products__display">
+                                    <div>
+                                        <i class='bx bxs-grid'></i>
                                     </div>
-                                    <div class="products__info">
-                                        <div class="products__title">
-                                            ${it.name}
-                                        </div>
-                                        <div class="products__details">
-                                            <div class="products__price">
-                                                ${it.sell}$
-                                            </div>
-                                            <div class="products__stock">
-                                                Stock: ${it.stock}
-                                            </div>
-                                        </div>
-                                        <div class="products__btn">
-                                            <a href="viewItem?id=${it.id}">
-                                                <i class="fa-regular fa-eye"></i>
-                                            </a>
-                                            <a onclick="checkQuantity(${it.stock}, '${it.id}')">
-                                                <i class="fa-solid fa-cart-shopping"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="products__tag">
-                                        New
+                                    <div>
+                                        <i class='bx bx-menu'></i>
                                     </div>
                                 </div>
-                            </c:forEach>
-
-                        </div>
-
-                        <div class="products__pagination">
-                            <ul>
-                                <c:set var="page" value="${requestScope.curPage}" />
-                                <c:forEach var="i" begin="${1}" end="${requestScope.numPages}" >
-                                    <li>
-                                        <a class="${page == i ? 'active' : ''}" href="products?page=${i}&${requestScope.url}">
-                                            ${i}
-                                        </a>
-                                    </li>
+                            </div>
+    
+                            <div class="products__list">
+                                <c:forEach var="it" items="${requestScope.listItem}">
+                                    <div class="products__item">
+                                        <div class="products__image">
+                                            <img src="${it.image}" alt="">
+                                        </div>
+                                        <div class="products__info">
+                                            <div class="products__title">
+                                                ${it.name}
+                                            </div>
+                                            <div class="products__details">
+                                                <div class="products__price">
+                                                    ${it.sell}$
+                                                </div>
+                                                <div class="products__stock">
+                                                    Stock: ${it.stock}
+                                                </div>
+                                            </div>
+                                            <div class="products__btn">
+                                                <a href="viewItem?id=${it.id}">
+                                                    <i class="fa-regular fa-eye"></i>
+                                                </a>
+                                                <a onclick="checkQuantity(${it.stock}, '${it.id}')">
+                                                    <i class="fa-solid fa-cart-shopping"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="products__tag">
+                                            New
+                                        </div>
+                                    </div>
                                 </c:forEach>
-
-                            </ul>
+    
+                            </div>
+    
+                            <div class="products__pagination">
+                                <ul>
+                                    <c:set var="page" value="${requestScope.curPage}" />
+                                    <c:forEach var="i" begin="${1}" end="${requestScope.numPages}" >
+                                        <li>
+                                            <a class="${page == i ? 'active' : ''}" href="products?page=${i}&${requestScope.url}">
+                                                ${i}
+                                            </a>
+                                        </li>
+                                    </c:forEach>
+    
+                                </ul>
+                            </div>
                         </div>
                     </div>
                     <!-- <input type="submit" value="SUBMIT"> -->

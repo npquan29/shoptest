@@ -78,7 +78,7 @@ public class ItemDAO extends DBContext {
         return res;
     }
 
-    public ArrayList<Item> filterItems(String[] catID, Double from, Double to, String sortType) {
+    public ArrayList<Item> filterItems(String[] catID, String name, Double from, Double to, String sortType) {
         String sql = "select * from item where 1 = 1 ";
         CategoryDAO cdb = new CategoryDAO();
         int size = cdb.getAll().size();
@@ -94,6 +94,9 @@ public class ItemDAO extends DBContext {
                     }
                 }
             }
+        }
+        if(name != null){
+            sql += " and `name` like '%" + name + "%'"; 
         }
         if (from != null) {
             sql += " and sellPrice > " + from;
@@ -141,7 +144,7 @@ public class ItemDAO extends DBContext {
         return list;
     }
 
-    public ArrayList<Item> getItemsByPrice(String[] catID, String op, String sortType) {
+    public ArrayList<Item> getItemsByPrice(String[] catID, String name, String op, String sortType) {
         Double pr1, pr2;
         switch (op) {
             case "1":
@@ -164,7 +167,7 @@ public class ItemDAO extends DBContext {
                 pr1 = null;
                 pr2 = null;
         }
-        return filterItems(catID, pr1, pr2, sortType);
+        return filterItems(catID, name, pr1, pr2, sortType);
     }
 
     public void updateQuantity(Item it, int num) {
