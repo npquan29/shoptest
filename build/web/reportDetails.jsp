@@ -217,7 +217,7 @@
                         datasets: [{
                                 label: 'Daily Revenue',
                                 data: totals,
-                                fill: false,
+                                fill: true,
                                 borderColor: "#b88e2f",
                                 borderWidth: 2
                             }]
