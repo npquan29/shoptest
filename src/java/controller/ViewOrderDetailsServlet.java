@@ -6,6 +6,7 @@
 package controller;
 
 import dal.OrderDAO;
+import dal.OrderItemDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -13,15 +14,14 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
-import java.util.List;
-import model.ChartData;
-import org.json.JSONObject;
+import model.Order;
+import model.OrderItem;
 
 /**
  *
  * @author lap
  */
-public class AdminServlet extends HttpServlet {
+public class ViewOrderDetailsServlet extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -38,10 +38,10 @@ public class AdminServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AdminServlet</title>");  
+            out.println("<title>Servlet ViewOrderDetailsServlet</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AdminServlet at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet ViewOrderDetailsServlet at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -58,7 +58,14 @@ public class AdminServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.getRequestDispatcher("admin.jsp").forward(request, response);
+        String orderID = request.getParameter("orderID");
+        OrderDAO odb = new OrderDAO();
+        OrderItemDAO oidb = new OrderItemDAO();
+        Order x = odb.getOrderByID(orderID);
+        ArrayList<OrderItem> list = oidb.getListItemByOrder(x);
+        request.setAttribute("order", x);
+        request.setAttribute("listIt", list);
+        request.getRequestDispatcher("viewOrder.jsp").forward(request, response);
     } 
 
     /** 

@@ -13,7 +13,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
-import java.util.List;
 import model.ChartData;
 import org.json.JSONObject;
 
@@ -21,7 +20,7 @@ import org.json.JSONObject;
  *
  * @author lap
  */
-public class AdminServlet extends HttpServlet {
+public class ReportServlet extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -38,10 +37,10 @@ public class AdminServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AdminServlet</title>");  
+            out.println("<title>Servlet ReportServlet</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AdminServlet at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet ReportServlet at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -58,7 +57,49 @@ public class AdminServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.getRequestDispatcher("admin.jsp").forward(request, response);
+        response.setContentType("application/json");
+        PrintWriter out = response.getWriter();
+        OrderDAO odb = new OrderDAO();
+        
+        int month = Integer.valueOf(request.getParameter("month"));
+        
+        //Get chart's data
+        ArrayList<ChartData> orderStats = odb.getDailyTotal(month);
+   
+        ArrayList<ChartData> allDays = new ArrayList<>();
+        for (int day = 1; day <= 31; day++) {
+            boolean dayExists = false;
+            for (ChartData orderStat : orderStats) {
+                if (orderStat.getDay() == day) {
+                    allDays.add(orderStat);
+                    dayExists = true;
+                    break;
+                }
+            }
+            if (!dayExists) {
+                allDays.add(new ChartData(day, 0));
+            }
+        }
+        
+        //Get total revenue in month
+        double totalMonthRevenue = odb.getTotalRevenueInCurrentMonth(month);
+        
+        //Get total item sold
+        int totalItemSold = odb.getTotalItemsSoldInMonth(month);
+        
+        JSONObject resultObject = new JSONObject();
+        resultObject.put("monthTotal", totalMonthRevenue);
+        resultObject.put("chartData", allDays);
+        resultObject.put("totalItemSold", totalItemSold);
+         if(month != -1){
+            double totalProfit = odb.getProfitInMonth(month);
+            resultObject.put("totalProfit", totalProfit);
+        } else {
+            double totalRevenue = odb.getRevenue();  
+            resultObject.put("totalRevenue", totalRevenue);
+        }
+        
+        out.println(resultObject.toString());
     } 
 
     /** 

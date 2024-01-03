@@ -53,7 +53,9 @@
                 </div>
 
                 <div class="content__footer">
-                    <div>Forgot Password?</div>
+                    <div>
+                        <a href="forgot">Forgot Password</a>
+                    </div>
                     <span>
                         Don’t have an account?
                         <a href="signup">Register</a>

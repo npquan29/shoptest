@@ -1,6 +1,6 @@
 <%-- 
-    Document   : login
-    Created on : Nov 17, 2023, 10:03:39 PM
+    Document   : forgotPassword
+    Created on : Jan 3, 2024, 1:09:13 PM
     Author     : lap
 --%>
 
@@ -10,6 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Forgot Password</title>
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
               integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
@@ -21,7 +22,6 @@
         <link rel="stylesheet" href="assets/css/base.css" />
         <link rel="stylesheet" href="assets/css/login.css" />
 
-        <title>Login</title>
     </head>
     <body>
         <div class="login">
@@ -32,7 +32,7 @@
                     </div>
                     <h1>Welcome to Furnish</h1>
                     <div class="content__desc">
-                        Sign in to continue
+                        Please enter your username to continue!
                     </div>
                 </div>
 
@@ -41,26 +41,23 @@
                 </c:if>
 
                 <div class="content__body">
-                    <form action="login" method="post">
+                    <form action="forgot" method="post">
                         <div class="form-group">
                             <input type="text" id="username" name="username" required placeholder="Username" />
                         </div>
-                        <div class="form-group">
-                            <input type="password" id="password" name="password" required placeholder="Password" />
-                        </div>
-                        <button type="submit">Sign In</button>
+                        <button type="submit">Next</button>
                     </form>
                 </div>
-
+                
                 <div class="content__footer">
                     <div>
-                        <a href="forgot">Forgot Password</a>
+                        <a href="login">Back to Login</a>
                     </div>
                     <span>
                         Don’t have an account?
                         <a href="signup">Register</a>
                     </span>
-                </div>
+                </div>    
             </div>
         </div>
     </body>

@@ -1,7 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 :root {
-    --font: 'Inter', sans-serif;;
+    --font: 'Inter', sans-serif;
+    ;
 }
 
 * {
@@ -22,6 +23,7 @@ a {
     max-width: 1140px;
     margin: 0 auto;
 }
+
 /* End container */
 
 /* header */
@@ -105,6 +107,7 @@ a {
     display: block;
     font-size: 14px;
 }
+
 /* End dheader */
 
 /* main */
@@ -134,7 +137,7 @@ a {
     margin-bottom: 10px;
 }
 
-.main__sidebar ul li a{
+.main__sidebar ul li a {
     display: flex;
     align-items: center;
     padding: 8px 60px 8px 20px;
@@ -144,7 +147,7 @@ a {
     transition: all .3s;
 }
 
-.main__sidebar ul li a:hover{
+.main__sidebar ul li a:hover {
     color: #fff;
     background-color: #B88E2F;
 }
@@ -186,6 +189,72 @@ a {
 .main__right {
     margin-left: 279.93px;
     padding: 40px 30px;
+    width: 100%;
+}
+
+.select__month {
+    padding: 30px 0;
+}
+
+.select__month label {
+    display: inline-block;
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+.select__month select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.main__report {
+    padding-bottom: 30px;
+}
+
+.main__box {
+    display: flex;
+    justify-content: space-between;
+}
+
+.box__item {
+    width: 30%;
+    padding: 10px;
+    background-color: #fff;
+    border: 2px solid #b88e2f;
+    border-radius: 5px;
+}
+
+.box__item h4 {
+    margin: 10px 0px;
+    margin-top: 0;
+    font-weight: 600;
+}
+
+.box__item h3 {
+    text-align: center;
+    margin: 0;
+}
+
+.canvas__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.canvas__header a{
+    display: inline-block;
+    padding: 10px 20px;
+    color: #000;
+    border: 1px solid #B88E2F;
+    border-radius: 5px;
+    transition: all .3s;
+}
+
+.canvas__header a:hover{
+    color: #fff;
+    background-color: #B88E2F;
 }
 
 .main__team {
@@ -232,7 +301,7 @@ a {
 .main__content-title {
     font-size: 36px;
     font-weight: 700;
-    line-height: 48px; 
+    line-height: 48px;
     margin-bottom: 20px;
 }
 
@@ -282,5 +351,5 @@ a {
     font-style: italic;
     font-weight: 500;
 }
-/* End main */
 
+/* End main */

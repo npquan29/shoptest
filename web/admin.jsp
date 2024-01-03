@@ -20,6 +20,8 @@
               crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
         <link rel="stylesheet" href="assets/css/adminDashboard.css">
 
     </head>
@@ -102,6 +104,33 @@
                 </div>
             </div>
             <div class="main__right">
+                <div class="main__report">
+                    <h1>Report</h1>
+                    <div class="main__box">
+                        <div class="box__item">
+                            <h4>Total revenue</h4>
+                            <h3></h3>
+                        </div>
+
+                        <div class="box__item">
+                            <h4>Month revenue</h4>
+                            <h3></h3>
+                        </div>
+
+                        <div class="box__item">
+                            <h4>Total items sold</h4>
+                            <h3></h3>
+                        </div>
+                    </div>
+
+                    <div class="canvas">
+                        <div class="canvas__header">
+                            <h4>Revenue chart by day</h4>
+                            <a href="reportDetails">Details</a>
+                        </div>
+                        <canvas id="myChart" style="max-height: 300px; width: 100%"></canvas>
+                    </div>
+                </div>
                 <div class="main__team">
                     <div class="main__banner">
                         <div class="main__img">
@@ -145,5 +174,57 @@
             </div>
         </div>
         <!-- main -->
+
+        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                fetch("report?month=-1")
+                        .then((response) => response.json())
+                        .then((data) => {
+                            const days = data.chartData.map((item) => item.day);
+                            const totals = data.chartData.map((item) => item.total);
+                            const revenue = [
+                                data.totalRevenue,
+                                data.monthTotal,
+                                data.totalItemSold
+                            ];
+
+                            const h3Data = document.querySelectorAll(".main__box .box__item h3");
+                            h3Data.forEach((element, index) => {
+                                if (revenue[index] > 0) {
+                                    element.innerHTML = revenue[index];
+                                } else {
+                                    element.innerHTML = 0;
+                                }
+                            });
+
+                            var ctx = document.getElementById("myChart").getContext("2d");
+                            var myChart = new Chart(ctx, {
+                                type: "line",
+                                data: {
+                                    labels: days,
+                                    datasets: [
+                                        {
+                                            label: "Daily Revenue",
+                                            data: totals,
+                                            fill: true,
+                                            borderColor: "#b88e2f",
+                                            borderWidth: 2
+                                        }
+                                    ]
+                                },
+                                options: {
+                                    scales: {
+                                        y: {
+                                            beginAtZero: true
+                                        }
+                                    }
+                                }
+                            });
+                        })
+                        .catch((error) => console.error("Error:", error));
+            });
+        </script>
     </body>
 </html>

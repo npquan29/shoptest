@@ -81,7 +81,8 @@
     text-align: center;
 }
 
-.content__footer div {
+.content__footer div a {
+    display: block;
     font-weight: 600;
     margin-bottom: 15px;
     letter-spacing: 0.5px;
@@ -97,4 +98,12 @@
 .content__footer span a{
     color: #B88E2F;
     font-weight: 600;
+}
+
+.content__footer .newpass {
+    margin-bottom: 10px;
+}
+
+.content__footer .newpass span {
+    font-size: 20px;
 }
